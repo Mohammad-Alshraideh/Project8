@@ -15,6 +15,7 @@ namespace Project8.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        Project8Entities db = new Project8Entities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -70,6 +71,8 @@ namespace Project8.Controllers
         {
             if (!ModelState.IsValid)
             {
+                
+
                 return View(model);
             }
 
@@ -77,8 +80,9 @@ namespace Project8.Controllers
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
-            {
+            {       
                 case SignInStatus.Success:
+                  
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -147,14 +151,43 @@ namespace Project8.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, string firstName,string lastName, HttpPostedFileBase idImage, HttpPostedFileBase userImage, int nationalNumber, float avg, HttpPostedFileBase highschooldegree)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    Guid guid1 = Guid.NewGuid();
+                    Guid guid2 = Guid.NewGuid();
+                    Guid guid3 = Guid.NewGuid();
+                    string y = firstName;
+                    string id = db.AspNetUsers.Where(a => a.Email == model.Email).Select(a => a.Id).FirstOrDefault();
+                    var student = db.AspNetUsers.Find(id);
+                    student.First_Name = firstName;
+                    student.Last_Name = lastName;
+                    student.Id_Image = guid1 + "-" + idImage.FileName;
+                    string idpath = guid1 +"-"+ idImage.FileName;
+                    idImage.SaveAs(Server.MapPath("../Images/" + idpath));
+                    student.National_Number = nationalNumber;
+                    student.user_image =guid2+"-"+ userImage.FileName;
+                    string userpath = guid2 +"-"+ userImage.FileName;
+                    userImage.SaveAs(Server.MapPath("../Images/" + userpath));
+                    student.HighSchool_Avg = avg;
+                    student.HighSchool_Image =guid3+"-"+ highschooldegree.FileName;
+                    string degreepath = guid3 + "-" + highschooldegree.FileName;
+                    highschooldegree.SaveAs(Server.MapPath("../Images/"+ degreepath));
+                    student.Balance = 0;
+                 
+                    
+                    db.SaveChanges();
+                    var role = new AspNetUserRole();
+                    role.UserId = id;
+                    role.RoleId = "3";
+                    db.AspNetUserRoles.Add(role);
+                    db.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

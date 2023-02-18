@@ -5,7 +5,7 @@
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
@@ -27,6 +27,49 @@
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="Email">First Name</label>
+        <div class="col-md-10">
+            <input class="form-control" data-val="true" data-val-required="The First Name field is required."   id="firstName" name="firstName" type="text"  />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="Email">Last Name</label>
+        <div class="col-md-10">
+            <input class="form-control"  data-val="true"  data-val-required="The Last Name field is required."  id="lastName" name="lastName" type="text" value="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="Email">ID Image</label>
+        <div class="col-md-10">
+            <input class="form-control" accept="image/*" data-val="true" data-val-required="The ID Image field is required."    id="idImage" name="idImage" type="file" value="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="Email">User Image</label>
+        <div class="col-md-10">
+            <input class="form-control" accept="image/*" data-val="true" data-val-required="The User Image field is required." id="userImage" name="userImage" type="file" value="" />
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="Email">National Number</label>
+        <div class="col-md-10">
+            <input class="form-control"  data-val="true"  data-val-required="The National Number field is required."  id="nationalNumber" name="nationalNumber" type="text" value="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="Email">High School Avg</label>
+        <div class="col-md-10">
+            <input class="form-control" data-val="true"  data-val-required="The high School AVG field is required." id="avg" name="avg" type="text" value="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="Email">High School Degree</label>
+        <div class="col-md-10">
+            <input class="form-control" data-val="true" data-val-required="The High Degree field is required." accept="image/*" id="highschooldegree" name="highschooldegree" type="file" value="" />
         </div>
     </div>
     <div class="form-group">

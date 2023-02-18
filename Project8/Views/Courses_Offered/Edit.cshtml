@@ -1,0 +1,82 @@
+﻿@model Project8.Models.Courses_Offered
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Courses_Offered</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.offered_id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.course_id, "course_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("course_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.course_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @{string[] x = Model.start_time.ToString().Split(':');
+                @Html.LabelFor(model => model.start_time, htmlAttributes: new
+           {
+               @class = "control-label col-md-2"
+           })
+            <div class="col-md-10">
+                <input type="text" name="start_Hour" id="start_Hour" value="@x[0]" />
+                <input type="text" name="start_min" id="start_min" value="@x[1]" />
+                @Html.ValidationMessageFor(model => model.start_time, "", new { @class = "text-danger" })
+            </div> 
+            }
+        </div>
+        <div class="form-group">
+            @{string[] endTime = Model.end_time.ToString().Split(':');
+                @Html.LabelFor(model => model.end_time, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" name="end_Hour" id="end_Hour" value="@endTime[0]"/>
+                    <input type="text" name="end_min" id="end_min" value="@endTime[1]" />
+                    @Html.ValidationMessageFor(model => model.end_time, "", new { @class = "text-danger" })
+                </div>}
+            </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.doctor_id, "doctor_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("doctor_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.doctor_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.semester_id, "semester_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("semester_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.semester_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

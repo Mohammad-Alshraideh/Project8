@@ -1,25 +1,36 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Project8.Controllers;
 using Project8.Models;
+
+
+ 
+
 
 namespace Project8.Controllers
 {
     [Authorize]
+
     public class ManageController : Controller
     {
+        Project8Entities db = new Project8Entities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
         {
         }
-
+   
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
@@ -54,6 +65,7 @@ namespace Project8.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+           
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -62,17 +74,20 @@ namespace Project8.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
-
+            ViewBag.sender = "MyInformation";
             var userId = User.Identity.GetUserId();
+            var UserInfo = db.AspNetUsers.Where(x => x.Id == userId);
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+      
+
             };
-            return View(model);
+            return View(UserInfo.FirstOrDefault());
         }
 
         //
@@ -238,7 +253,7 @@ namespace Project8.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("ManageProfile", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);
@@ -332,8 +347,64 @@ namespace Project8.Controllers
 
             base.Dispose(disposing);
         }
+        public ActionResult MyCourses()
+        {
+            var userId = User.Identity.GetUserId();
+            //var course = db.Enrollments.Where(x => x.Student_id == userId).ToList();
+            var ok = db.AspNetRoles.FirstOrDefault();
+            ViewBag.sender = "MyCourses";
+            
+            // Request a redirect to the external login provider to link a login for the current user
+            return View("index" , ok);
+        }
+        //get
+        public ActionResult Balance()
+        {
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+            ViewBag.sender = "Balance";
+            return View("index");
+        }
+        public ActionResult ManageProfile()
+        {
+            ViewBag.sender = "ManageProfile";
+            return View("index");
+        }
+   
+        public ActionResult Pay([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,user_image,Id_Image,National_Number,HighSchool_Image,HighSchool_Avg,First_Name,Last_Name,Major_Id,IsAccepted,Balance")] AspNetUser aspNetUser , string PayButton , string CardNumber , string CVC , string CardHolder)
+        {
+            int CurrentBalance = Convert.ToInt32(db.AspNetUsers.Find(User.Identity.GetUserId()).Balance);
+            var balance = db.AspNetUsers.Find(User.Identity.GetUserId());
+            Transaction trans = new Transaction();
+            trans.Transaction_Date= DateTime.Now;
+            trans.UserId= User.Identity.GetUserId();
+            trans.Amount = Convert.ToInt32(PayButton);
+            trans.User_Action = true;
+            trans.CardNumber = Convert.ToInt32(CardNumber);
+            trans.CVC= Convert.ToInt32(CVC);
+            trans.FullName= CardHolder;
+            db.Transactions.Add(trans);
+            balance.Balance = Convert.ToInt32(PayButton) + CurrentBalance;
+            MailMessage mail = new MailMessage();
+            mail.To.Add(balance.Email);
+            mail.From = new MailAddress("jaberfahd2233@gmail.com");
+            mail.Subject = "Deposit";
 
-#region Helpers
+            mail.Body = $"We Recieved your payemnt of {PayButton} ";
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
+            smtp.Host = "smtp.gmail.com";
+            smtp.Credentials = new System.Net.NetworkCredential("jaberfahd2233", "obsrmfoexbukaspu");
+            smtp.Send(mail);
+            db.SaveChanges();
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+            ViewBag.sender = "Balance";
+            return View("index");
+        }
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -383,7 +454,6 @@ namespace Project8.Controllers
             RemovePhoneSuccess,
             Error
         }
-
-#endregion
+        #endregion
     }
 }

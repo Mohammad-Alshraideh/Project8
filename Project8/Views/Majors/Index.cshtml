@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Project8.Models.Major>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .imgthumbnail {
+        z-index: 999999;
+        cursor: pointer;
+        -webkit-transition-property: all;
+        -webkit-transition-duration: 0.5s;
+    }
+
+        .imgthumbnail:hover {
+            transform: scale(5);
+        }
+</style>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Major_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Major_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Major_Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.College.College_Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Major_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Major_Description)
+            </td>
+            <td>
+                <img style="height:50px; width:50px" class="imgthumbnail" src="../Images/@Html.DisplayFor(modelItem => item.Major_Image)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.College.College_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Major_Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Major_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Major_Id })
+            </td>
+        </tr>
+    }
+
+</table>

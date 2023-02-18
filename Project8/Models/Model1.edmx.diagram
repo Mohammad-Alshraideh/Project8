@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ecd19bca650b49158ee915079bf30b03" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="Project8Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.AspNetRole" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.AspNetUserClaim" Width="1.5" PointX="7.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.AspNetUserLogin" Width="1.5" PointX="7.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.AspNetUserRole" Width="1.5" PointX="10.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.AspNetUser" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.College" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.Cours" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.Courses_Offered" Width="1.5" PointX="9.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.Day" Width="1.5" PointX="7.5" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.Doctor" Width="1.5" PointX="7.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.Enrollment" Width="1.5" PointX="12" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.Major" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.RegistrationPeriod" Width="1.5" PointX="9.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.semester" Width="1.5" PointX="7.5" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project8Model.Transaction" Width="1.5" PointX="7.5" PointY="20.625" IsExpanded="true" />
+        <AssociationConnector Association="Project8Model.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK__AspNetUse__Major__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK__Enrollmen__Stude__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK__Transacti__UserI__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_Doctors_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK__Majors__College___60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK__Courses__Major_I__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_Courses_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_Courses_Offered_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK__Enrollmen__Cours__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_Courses_Offered_Days" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_Courses_Offered_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_Courses_Offered_semesters" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_Enrollments_semesters" ManuallyRouted="false" />
+        <AssociationConnector Association="Project8Model.FK_RegistrationPeriods_semesters" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,56 @@
+﻿@model Project8.Models.College
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .imgthumbnail {
+        z-index: 999999;
+        cursor: pointer;
+        -webkit-transition-property: all;
+        -webkit-transition-duration: 0.5s;
+    }
+
+        .imgthumbnail:hover {
+            transform: scale(5);
+        }
+</style>
+
+<h2>Details</h2>
+
+<div>
+    <h4>College</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.College_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.College_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.College_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.College_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.College_Image)
+        </dt>
+
+        <dd>
+            <img  style="height:250px; width:250px" src="../../Images/@Html.DisplayFor(modelItem => Model.College_Image)" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.College_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
