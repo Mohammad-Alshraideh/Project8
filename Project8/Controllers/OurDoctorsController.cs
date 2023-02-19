@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,113 +10,112 @@ using Project8.Models;
 
 namespace Project8.Controllers
 {
-    public class CoursController : Controller
+    public class OurDoctorsController : Controller
     {
         private Project8Entities db = new Project8Entities();
 
-        // GET: Cours
+        // GET: OurDoctors
         public ActionResult Index()
         {
-            var courses = db.Courses.Include(c => c.Major);
-            dynamic mymodel = new ExpandoObject();
-            return View(courses.ToList());
+            var doctors = db.Doctors.Include(d => d.AspNetUser);
+            return View(doctors.ToList());
         }
 
-        // GET: Cours/Details/5
+        // GET: OurDoctors/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cours cours = db.Courses.Find(id);
-            if (cours == null)
+            Doctor doctor = db.Doctors.Find(id);
+            if (doctor == null)
             {
                 return HttpNotFound();
             }
-            return View(cours);
+            return View(doctor);
         }
 
-        // GET: Cours/Create
+        // GET: OurDoctors/Create
         public ActionResult Create()
         {
-            ViewBag.Major_Id = new SelectList(db.Majors, "Major_Id", "Major_Name");
+            ViewBag.User_ID = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
-        // POST: Cours/Create
+        // POST: OurDoctors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Course_Id,Course_Name,Number_Of_Hours,Course_Description,Major_Id,syllabus")] Cours cours)
+        public ActionResult Create([Bind(Include = "Doctor_Id,Doctor_Name,Doctor_Image,Doctor_Phone,Doctor_Email,User_ID")] Doctor doctor)
         {
             if (ModelState.IsValid)
             {
-                db.Courses.Add(cours);
+                db.Doctors.Add(doctor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Major_Id = new SelectList(db.Majors, "Major_Id", "Major_Name", cours.Major_Id);
-            return View(cours);
+            ViewBag.User_ID = new SelectList(db.AspNetUsers, "Id", "Email", doctor.User_ID);
+            return View(doctor);
         }
 
-        // GET: Cours/Edit/5
+        // GET: OurDoctors/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cours cours = db.Courses.Find(id);
-            if (cours == null)
+            Doctor doctor = db.Doctors.Find(id);
+            if (doctor == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Major_Id = new SelectList(db.Majors, "Major_Id", "Major_Name", cours.Major_Id);
-            return View(cours);
+            ViewBag.User_ID = new SelectList(db.AspNetUsers, "Id", "Email", doctor.User_ID);
+            return View(doctor);
         }
 
-        // POST: Cours/Edit/5
+        // POST: OurDoctors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Course_Id,Course_Name,Number_Of_Hours,Course_Description,Major_Id,syllabus")] Cours cours)
+        public ActionResult Edit([Bind(Include = "Doctor_Id,Doctor_Name,Doctor_Image,Doctor_Phone,Doctor_Email,User_ID")] Doctor doctor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cours).State = EntityState.Modified;
+                db.Entry(doctor).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Major_Id = new SelectList(db.Majors, "Major_Id", "Major_Name", cours.Major_Id);
-            return View(cours);
+            ViewBag.User_ID = new SelectList(db.AspNetUsers, "Id", "Email", doctor.User_ID);
+            return View(doctor);
         }
 
-        // GET: Cours/Delete/5
+        // GET: OurDoctors/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cours cours = db.Courses.Find(id);
-            if (cours == null)
+            Doctor doctor = db.Doctors.Find(id);
+            if (doctor == null)
             {
                 return HttpNotFound();
             }
-            return View(cours);
+            return View(doctor);
         }
 
-        // POST: Cours/Delete/5
+        // POST: OurDoctors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cours cours = db.Courses.Find(id);
-            db.Courses.Remove(cours);
+            Doctor doctor = db.Doctors.Find(id);
+            db.Doctors.Remove(doctor);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

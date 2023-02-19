@@ -1,0 +1,101 @@
+﻿ 
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+ 
+<body>
+    <section class="probootstrap-section probootstrap-section-colored">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-left section-heading probootstrap-animate">
+                    <h1>Our Teachers</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="probootstrap-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="probootstrap-flex-block">
+                        <div class="probootstrap-text probootstrap-animate">
+                            <h3>We Hired Certified Teachers For Our Students</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis explicabo veniam labore ratione illo vero voluptate a deserunt incidunt odio aliquam commodi blanditiis voluptas error non rerum temporibus optio accusantium!</p>
+                            <p><a href="#" class="btn btn-primary">Learn More</a></p>
+                        </div>
+                        <div class="probootstrap-image probootstrap-animate" style="background-image: url(/img/slider_3.jpg)">
+                            <a href="https://vimeo.com/45830194" class="btn-video popup-vimeo"><i class="icon-play3"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="probootstrap-section">
+        <div class="container">
+
+
+
+            @{int count = 0; }
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="probootstrap-teacher text-center probootstrap-animate">
+                        <figure class="media">
+                            <img src="/images/@item.Doctor_Image" alt="Free Bootstrap Template by ProBootstrap.com" class="img-responsive">
+                        </figure>
+                        <div class="text">
+                            <h3>@item.Doctor_Name</h3>
+                            <p>@item.Doctor_Phone</p>
+                            <ul class="probootstrap-footer-social">
+                                <li class="twitter"><a href="#"><i class="icon-twitter"></i></a></li>
+                                <li class="facebook"><a href="#"><i class="icon-facebook2"></i></a></li>
+                                <li class="instagram"><a href="#"><i class="icon-instagram2"></i></a></li>
+                                <li class="google-plus"><a href="#"><i class="icon-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                if (count % 4 == 0)
+                {
+                    <div class="clearfix visible-sm-block visible-xs-block"></div>
+                }
+                count++;
+            }
+
+
+
+
+        </div>
+
+        
+    </section>
+
+    <section class="probootstrap-cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="probootstrap-animate" data-animate-effect="fadeInRight">Get your admission now!</h2>
+                    <a href="#" role="button" class="btn btn-primary btn-lg btn-ghost probootstrap-animate" data-animate-effect="fadeInLeft">Enroll</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+  
+
+
+
+
+
+</body>
+ 

@@ -87,6 +87,7 @@ namespace Project8.Controllers
       
 
             };
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
             return View(UserInfo.FirstOrDefault());
         }
 
@@ -172,6 +173,7 @@ namespace Project8.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
             return RedirectToAction("Index", "Manage");
         }
 
@@ -225,6 +227,7 @@ namespace Project8.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
+
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
@@ -255,6 +258,7 @@ namespace Project8.Controllers
                 }
                 return RedirectToAction("ManageProfile", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
             AddErrors(result);
             return View(model);
         }
@@ -353,19 +357,23 @@ namespace Project8.Controllers
             //var course = db.Enrollments.Where(x => x.Student_id == userId).ToList();
             var ok = db.AspNetRoles.FirstOrDefault();
             ViewBag.sender = "MyCourses";
-            
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
             // Request a redirect to the external login provider to link a login for the current user
             return View("index" , ok);
         }
         //get
         public ActionResult Balance()
         {
+            ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
             ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
             ViewBag.sender = "Balance";
             return View("index");
         }
         public ActionResult ManageProfile()
         {
+            
+            ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
             ViewBag.sender = "ManageProfile";
             return View("index");
         }
@@ -401,7 +409,20 @@ namespace Project8.Controllers
             smtp.Send(mail);
             db.SaveChanges();
             ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+            ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
             ViewBag.sender = "Balance";
+            return View("index");
+        }
+
+        [HttpPost]
+        public ActionResult ChangePhone([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,user_image,Id_Image,National_Number,HighSchool_Image,HighSchool_Avg,First_Name,Last_Name,Major_Id,IsAccepted,Balance")] AspNetUser aspNetUser , string Pnumber)
+        {
+            var phon = db.AspNetUsers.Find(User.Identity.GetUserId());
+            phon.PhoneNumber = Pnumber;
+            ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+            db.SaveChanges();
+            ViewBag.sender = "ManageProfile";
             return View("index");
         }
         #region Helpers
