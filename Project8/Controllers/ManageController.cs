@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -246,7 +247,11 @@ namespace Project8.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
+                ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+                ViewBag.Email = db.AspNetUsers.Find(User.Identity.GetUserId()).Email;
+                ViewBag.sender = "ManageProfile";
+                return View("index");
             }
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
@@ -254,13 +259,19 @@ namespace Project8.Controllers
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                 if (user != null)
                 {
+                    ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
+                    ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+                    ViewBag.Email = db.AspNetUsers.Find(User.Identity.GetUserId()).Email;
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
                 return RedirectToAction("ManageProfile", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
+            ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
             ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+            ViewBag.Email = db.AspNetUsers.Find(User.Identity.GetUserId()).Email;
             AddErrors(result);
-            return View(model);
+            ViewBag.sender = "ManageProfile";
+            return View("index");
         }
 
         //
@@ -364,18 +375,22 @@ namespace Project8.Controllers
         //get
         public ActionResult Balance()
         {
-            ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+            ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
             ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+            ViewBag.Email = db.AspNetUsers.Find(User.Identity.GetUserId()).Email;
             ViewBag.sender = "Balance";
             return View("index");
         }
         public ActionResult ManageProfile()
         {
-            
+            string iddd = User.Identity.GetUserId();
+   
             ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
             ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+          
+            ViewBag.Email = db.AspNetUsers.Find(User.Identity.GetUserId()).Email;
             ViewBag.sender = "ManageProfile";
-            return View("index");
+            return View("index") ;
         }
    
         public ActionResult Pay([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,user_image,Id_Image,National_Number,HighSchool_Image,HighSchool_Avg,First_Name,Last_Name,Major_Id,IsAccepted,Balance")] AspNetUser aspNetUser , string PayButton , string CardNumber , string CVC , string CardHolder)
@@ -410,6 +425,7 @@ namespace Project8.Controllers
             db.SaveChanges();
             ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
             ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
+            ViewBag.Email = db.AspNetUsers.Find(User.Identity.GetUserId()).Email;
             ViewBag.sender = "Balance";
             return View("index");
         }
@@ -417,13 +433,288 @@ namespace Project8.Controllers
         [HttpPost]
         public ActionResult ChangePhone([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,user_image,Id_Image,National_Number,HighSchool_Image,HighSchool_Avg,First_Name,Last_Name,Major_Id,IsAccepted,Balance")] AspNetUser aspNetUser , string Pnumber)
         {
+            if(!string.IsNullOrEmpty(Pnumber))
+            {
+
+           
             var phon = db.AspNetUsers.Find(User.Identity.GetUserId());
             phon.PhoneNumber = Pnumber;
             ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
             ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
             db.SaveChanges();
+            }
+            ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+            ViewBag.Email = db.AspNetUsers.Find(User.Identity.GetUserId()).Email;
             ViewBag.sender = "ManageProfile";
             return View("index");
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ChangeEmail([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,user_image,Id_Image,National_Number,HighSchool_Image,HighSchool_Avg,First_Name,Last_Name,Major_Id,IsAccepted,Balance")] AspNetUser aspNetUser, string ChangeEmail)
+        {
+            if (!string.IsNullOrEmpty(ChangeEmail))
+            {
+
+
+                var phon = db.AspNetUsers.Find(User.Identity.GetUserId());
+
+                phon.Email = ChangeEmail;
+               
+                db.SaveChanges();
+            }
+            ViewBag.PhoneNumber = db.AspNetUsers.Find(User.Identity.GetUserId()).PhoneNumber;
+            ViewBag.CurrentBalance = db.AspNetUsers.Find(User.Identity.GetUserId()).Balance;
+            ViewBag.Email = db.AspNetUsers.Find(User.Identity.GetUserId()).Email;
+            ViewBag.sender = "ManageProfile";
+            return View("index");
+        }
+        [Authorize(Roles = "Student")]
+        public ActionResult Registration()
+        {
+            string userid = User.Identity.GetUserId();
+            var logstudent = db.AspNetUsers.Find(userid);
+            int combalance = 9 * Convert.ToInt32(logstudent.Major.Price);
+            var semisteres = db.semesters;
+            int current = 1;
+            bool test = true;
+            foreach (var semester in semisteres)
+            {
+                if (semester.end_date > DateTime.Now.Date && semester.start_date < DateTime.Now.Date)
+                {
+                    current = semester.id;
+                    test = false;
+                }
+            }
+            if (test)
+            {
+                string Error1 = $"You should be in the registration period";
+                return RedirectToAction("Errors", new { Error = Error1 });
+            }
+
+            var dates1 = db.RegistrationPeriods.First(x => x.semester_id == current);
+            if (DateTime.Now.Date <= dates1.start_date && DateTime.Now.Date >= dates1.end_date)
+            {
+                string Error1 = $"You should be in the registration period";
+                return RedirectToAction("Errors", new { Error = Error1 });
+
+            }
+            if (logstudent.Balance < combalance)
+            {
+                string Error = $"You dont have the min balance which is {combalance}";
+                return RedirectToAction("Errors", new { Error = Error });
+            }
+
+            var currentregestered = db.Enrollments.Where(x => x.semester_id == current && x.Student_id == userid).Include(x => x.Courses_Offered.Cours).Include(x => x.Courses_Offered).ToList();
+            return View(currentregestered);
+        }
+
+        [HttpPost]
+        public ActionResult Registration(int? Course_id, int? delete)
+        {
+            //18 hours max
+            string userid = User.Identity.GetUserId();
+            var logstudent = db.AspNetUsers.Find(userid);
+            int balancee = Convert.ToInt32(logstudent.Balance);
+            int hourprice = Convert.ToInt32(logstudent.Major.Price);
+
+            var semisteres = db.semesters;
+            int current = 1;
+            bool test = true;
+            foreach (var semester in semisteres)
+            {
+                if (semester.end_date > DateTime.Now.Date && semester.start_date < DateTime.Now.Date)
+                {
+                    current = semester.id;
+                    test = false;
+                }
+            }
+            var currentregestered = db.Enrollments.Where(x => x.semester_id == current && x.Student_id == userid).Include(x => x.Courses_Offered.Cours).Include(x => x.Courses_Offered).ToList();
+
+            var registerednow = db.Enrollments.Where(x => x.Student_id == userid && x.semester_id == current);
+
+            if (delete != null)
+            {
+                var enroll = db.Enrollments.Find(delete);
+                var selectedcourse2 = db.Courses_Offered.Find(enroll.Course_id);
+                int hourss = Convert.ToInt32(enroll.Courses_Offered.Cours.Number_Of_Hours);
+                logstudent.Balance = balancee + hourss * hourprice;
+                db.Enrollments.Remove(enroll);
+                int counter2 = Convert.ToInt32(selectedcourse2.Registered);
+                selectedcourse2.Registered = counter2 - 1;
+                db.SaveChanges();
+                currentregestered = db.Enrollments.Where(x => x.semester_id == current && x.Student_id == userid).Include(x => x.Courses_Offered.Cours).Include(x => x.Courses_Offered).ToList();
+                return View(currentregestered);
+
+            }
+
+            var selectedcourse = db.Courses_Offered.Find(Course_id);
+            if (selectedcourse == null)
+            {
+                TempData["swal_message"] = $"There is no Courses in the schedual with this id ";
+                ViewBag.title = "Error";
+                ViewBag.icon = "warning";
+                return View(currentregestered);
+            }
+
+            int counthours = 0;
+            foreach (var item in registerednow)
+            {
+                counthours += Convert.ToInt32(item.Courses_Offered.Cours.Number_Of_Hours);
+
+            }
+            if (counthours + selectedcourse.Cours.Number_Of_Hours > 18)
+            {
+                TempData["swal_message"] = $"You can't register more than 18 houre per semester ";
+                ViewBag.title = "Error";
+                ViewBag.icon = "warning";
+                return View(currentregestered);
+            }
+
+
+
+            int hourenumber = Convert.ToInt32(selectedcourse.Cours.Number_Of_Hours);
+
+            int combalance = 9 * Convert.ToInt32(logstudent.Major.Price);
+            var coursesoffered = db.Courses_Offered.Where(x => x.semester_id == current && x.Cours.Major_Id == logstudent.Major_Id);
+            bool ex1 = false;
+            foreach (var courses in coursesoffered)
+            {
+                if (courses.course_id == selectedcourse.course_id)
+                {
+                    ex1 = true;
+                }
+
+            }
+            if (!ex1)
+            {
+                TempData["swal_message"] = $"This course belong to other major";
+                ViewBag.title = "Error";
+                ViewBag.icon = "warning";
+                return View(currentregestered);
+            }
+            foreach (var item in registerednow)
+            {
+                if (item.Courses_Offered.course_id == selectedcourse.Cours.Course_Id)
+                {
+                    TempData["swal_message"] = $"You already have this course ";
+                    ViewBag.title = "Error";
+                    ViewBag.icon = "warning";
+                    return View(currentregestered);
+                }
+                if (selectedcourse.start_time < item.Courses_Offered.end_time && selectedcourse.end_time > item.Courses_Offered.start_time && selectedcourse.Days_id == item.Courses_Offered.Days_id)
+                {
+                    TempData["swal_message"] = $"Partial overlapping occured  ";
+                    ViewBag.title = "Error";
+                    ViewBag.icon = "warning";
+                    return View(currentregestered);
+                }
+
+                else if (selectedcourse.start_time == item.Courses_Offered.start_time || selectedcourse.end_time == item.Courses_Offered.end_time && selectedcourse.Days_id == item.Courses_Offered.Days_id)
+                {
+                    TempData["swal_message"] = $"complete overlapping occured  ";
+                    ViewBag.title = "Error";
+                    ViewBag.icon = "warning";
+                    return View(currentregestered);
+                }
+
+
+            }
+
+            if (logstudent.Balance < hourenumber * hourprice)
+            {
+                TempData["swal_message"] = $"You dont have the enofh balance that is requiered for registration this course you should add   {hourenumber * hourprice - logstudent.Balance} ";
+                ViewBag.title = "Error";
+                ViewBag.icon = "warning";
+                return View(currentregestered);
+            }
+
+            if (selectedcourse.Registered >= selectedcourse.Capacity)
+            {
+                TempData["swal_message"] = $"This course is full ";
+                ViewBag.title = "Error";
+                ViewBag.icon = "warning";
+                return View(currentregestered);
+            }
+
+            bool ex = false;
+            var allregisteredcourses = db.Enrollments.Where(x => x.Student_id == userid && x.semester_id == current);
+            //Find();
+
+            if (selectedcourse.Cours.dependent_Course != null)
+            {
+                var dependentcourse = db.Courses.Find(Convert.ToInt32(selectedcourse.Cours.dependent_Course));
+
+                foreach (var item in allregisteredcourses)
+                {
+                    if (item.Course_id == dependentcourse.Course_Id)
+                    {
+                        ex = true;
+                    }
+                }
+                if (!ex)
+                {
+                    TempData["swal_message"] = $"you dont have the prerequirement which is {dependentcourse.Course_Name} ";
+                    ViewBag.title = "Error";
+                    ViewBag.icon = "warning";
+                    return View(currentregestered);
+
+                }
+            }
+            Enrollment addcourse = new Enrollment();
+            addcourse.semester_id = current;
+            addcourse.Course_id = Course_id;
+            addcourse.Student_id = userid;
+            addcourse.Is_Paid = false;
+
+            db.Enrollments.Add(addcourse);
+            db.SaveChanges();
+            logstudent.Balance = balancee - hourenumber * hourprice;
+            int counter = Convert.ToInt32(selectedcourse.Registered);
+            selectedcourse.Registered = counter + 1;
+            db.SaveChanges();
+            TempData["swal_message"] = $"you dont have registered this course successfully ";
+            ViewBag.title = "success";
+            ViewBag.icon = "success";
+            var currentregestered2 = db.Enrollments.Where(x => x.semester_id == current && x.Student_id == userid).Include(x => x.Courses_Offered.Cours).Include(x => x.Courses_Offered).ToList();
+            return View(currentregestered2);
+
+        }
+
+        public ActionResult schedule()
+        {
+            var semesteres = db.semesters.ToList();
+            var majors = db.Majors.ToList();
+            dynamic all = new ExpandoObject();
+            all.m = majors;
+            all.s = semesteres;
+            ViewBag.messege = "get";
+            return View(all);
+        }
+
+        [HttpPost]
+        public ActionResult schedule(int semesterid, int majorid)
+        {
+            var semesteres = db.semesters.ToList();
+            var majors = db.Majors.ToList();
+            dynamic all = new ExpandoObject();
+            all.m = majors;
+            all.s = semesteres;
+            ViewBag.semesterid = semesterid;
+            ViewBag.majorid = majorid;
+            var allcourses = db.Courses_Offered.Where(x => x.Cours.Major_Id == majorid && x.semester_id == semesterid).ToList();
+            all.a = allcourses;
+            return View(all);
+        }
+        public ActionResult Errors(string Error)
+        {
+            if (Error == null)
+            {
+                ViewBag.message = "No Errors";
+                return View();
+            }
+            ViewBag.message = Error;
+            return View();
         }
         #region Helpers
         // Used for XSRF protection when adding external logins

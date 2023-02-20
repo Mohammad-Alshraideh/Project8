@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Project8ModelStoreContainer" CdmEntityContainer="Project8Entities">
+  <EntityContainerMapping StorageEntityContainer="Project8ModelStoreContainer" CdmEntityContainer="Project8Entities2">
     <EntitySetMapping Name="C__MigrationHistory">
       <EntityTypeMapping TypeName="Project8Model.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -88,38 +88,30 @@
     <EntitySetMapping Name="Courses">
       <EntityTypeMapping TypeName="Project8Model.Cours">
         <MappingFragment StoreEntitySet="Courses">
+          <ScalarProperty Name="dependent_Course" ColumnName="dependent_Course" />
           <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
           <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
           <ScalarProperty Name="Number_Of_Hours" ColumnName="Number_Of_Hours" />
           <ScalarProperty Name="Course_Description" ColumnName="Course_Description" />
           <ScalarProperty Name="Major_Id" ColumnName="Major_Id" />
           <ScalarProperty Name="syllabus" ColumnName="syllabus" />
-          <ScalarProperty Name="dependent_Course" ColumnName="dependent_Course" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Courses_Offered">
       <EntityTypeMapping TypeName="Project8Model.Courses_Offered">
         <MappingFragment StoreEntitySet="Courses_Offered">
+          <ScalarProperty Name="Days_id" ColumnName="Days_id" />
+          <ScalarProperty Name="Registered" ColumnName="Registered" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="Hall" ColumnName="Hall" />
+          <ScalarProperty Name="Seat_Count" ColumnName="Seat_Count" />
           <ScalarProperty Name="offered_id" ColumnName="offered_id" />
           <ScalarProperty Name="course_id" ColumnName="course_id" />
           <ScalarProperty Name="start_time" ColumnName="start_time" />
           <ScalarProperty Name="end_time" ColumnName="end_time" />
           <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
           <ScalarProperty Name="semester_id" ColumnName="semester_id" />
-          <ScalarProperty Name="Seat_Count" ColumnName="Seat_Count" />
-          <ScalarProperty Name="Hall" ColumnName="Hall" />
-          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
-          <ScalarProperty Name="Registered" ColumnName="Registered" />
-          <ScalarProperty Name="Days_id" ColumnName="Days_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Days">
-      <EntityTypeMapping TypeName="Project8Model.Day">
-        <MappingFragment StoreEntitySet="Days">
-          <ScalarProperty Name="Days_id" ColumnName="Days_id" />
-          <ScalarProperty Name="Days" ColumnName="Days" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -138,12 +130,12 @@
     <EntitySetMapping Name="Enrollments">
       <EntityTypeMapping TypeName="Project8Model.Enrollment">
         <MappingFragment StoreEntitySet="Enrollments">
+          <ScalarProperty Name="Course_mark" ColumnName="Course_mark" />
           <ScalarProperty Name="Enrollment_Id" ColumnName="Enrollment_Id" />
           <ScalarProperty Name="Course_id" ColumnName="Course_id" />
           <ScalarProperty Name="Student_id" ColumnName="Student_id" />
           <ScalarProperty Name="Is_Paid" ColumnName="Is_Paid" />
           <ScalarProperty Name="semester_id" ColumnName="semester_id" />
-          <ScalarProperty Name="Course_mark" ColumnName="Course_mark" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -202,6 +194,14 @@
           <ScalarProperty Name="User_Action" ColumnName="User_Action" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Days">
+      <EntityTypeMapping TypeName="Project8Model.Day">
+        <MappingFragment StoreEntitySet="Days">
+          <ScalarProperty Name="Days" ColumnName="Days" />
+          <ScalarProperty Name="Days_id" ColumnName="Days_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

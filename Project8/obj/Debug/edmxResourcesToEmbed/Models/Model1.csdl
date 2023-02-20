@@ -104,11 +104,11 @@
     <Property Name="Course_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Major_Id" Type="Int32" />
     <Property Name="syllabus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="dependent_Course" Type="Int32" />
     <NavigationProperty Name="Major" Relationship="Self.FK__Courses__Major_I__66603565" FromRole="Courses" ToRole="Majors" />
-    <NavigationProperty Name="Courses1" Relationship="Self.FK_Courses_Courses" FromRole="Courses" ToRole="Courses1" />
-    <NavigationProperty Name="Cours1" Relationship="Self.FK_Courses_Courses" FromRole="Courses1" ToRole="Courses" />
     <NavigationProperty Name="Courses_Offered" Relationship="Self.FK_Courses_Offered_Courses" FromRole="Courses" ToRole="Courses_Offered" />
+    <Property Name="dependent_Course" Type="Int32" />
+    <NavigationProperty Name="Courses1" Relationship="Project8Model.FK_Courses_Courses" FromRole="Cours" ToRole="Cours1" />
+    <NavigationProperty Name="Cours1" Relationship="Project8Model.FK_Courses_Courses" FromRole="Cours1" ToRole="Cours" />
   </EntityType>
   <EntityType Name="Courses_Offered">
     <Key>
@@ -120,24 +120,16 @@
     <Property Name="end_time" Type="Time" Nullable="false" Precision="0" />
     <Property Name="doctor_id" Type="Int32" Nullable="false" />
     <Property Name="semester_id" Type="Int32" />
+    <NavigationProperty Name="Cours" Relationship="Self.FK_Courses_Offered_Courses" FromRole="Courses_Offered" ToRole="Courses" />
+    <NavigationProperty Name="Enrollments" Relationship="Self.FK__Enrollmen__Cours__693CA210" FromRole="Courses_Offered" ToRole="Enrollments" />
+    <NavigationProperty Name="Doctor" Relationship="Self.FK_Courses_Offered_Doctors" FromRole="Courses_Offered" ToRole="Doctors" />
+    <NavigationProperty Name="semester" Relationship="Self.FK_Courses_Offered_semesters" FromRole="Courses_Offered" ToRole="semesters" />
     <Property Name="Seat_Count" Type="Int32" />
     <Property Name="Hall" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Capacity" Type="Int32" />
     <Property Name="Registered" Type="Int32" />
     <Property Name="Days_id" Type="Int32" />
-    <NavigationProperty Name="Cours" Relationship="Self.FK_Courses_Offered_Courses" FromRole="Courses_Offered" ToRole="Courses" />
-    <NavigationProperty Name="Enrollments" Relationship="Self.FK__Enrollmen__Cours__693CA210" FromRole="Courses_Offered" ToRole="Enrollments" />
-    <NavigationProperty Name="Day" Relationship="Self.FK_Courses_Offered_Days" FromRole="Courses_Offered" ToRole="Days" />
-    <NavigationProperty Name="Doctor" Relationship="Self.FK_Courses_Offered_Doctors" FromRole="Courses_Offered" ToRole="Doctors" />
-    <NavigationProperty Name="semester" Relationship="Self.FK_Courses_Offered_semesters" FromRole="Courses_Offered" ToRole="semesters" />
-  </EntityType>
-  <EntityType Name="Day">
-    <Key>
-      <PropertyRef Name="Days_id" />
-    </Key>
-    <Property Name="Days_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Days" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Courses_Offered" Relationship="Self.FK_Courses_Offered_Days" FromRole="Days" ToRole="Courses_Offered" />
+    <NavigationProperty Name="Day" Relationship="Project8Model.FK_Courses_Offered_Days" FromRole="Courses_Offered" ToRole="Day" />
   </EntityType>
   <EntityType Name="Doctor">
     <Key>
@@ -161,10 +153,10 @@
     <Property Name="Student_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Is_Paid" Type="Boolean" />
     <Property Name="semester_id" Type="Int32" />
-    <Property Name="Course_mark" Type="Int32" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Enrollmen__Stude__6A30C649" FromRole="Enrollments" ToRole="AspNetUsers" />
     <NavigationProperty Name="Courses_Offered" Relationship="Self.FK__Enrollmen__Cours__693CA210" FromRole="Enrollments" ToRole="Courses_Offered" />
     <NavigationProperty Name="semester" Relationship="Self.FK_Enrollments_semesters" FromRole="Enrollments" ToRole="semesters" />
+    <Property Name="Course_mark" Type="Int32" />
   </EntityType>
   <EntityType Name="Major">
     <Key>
@@ -355,18 +347,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Courses_Courses">
-    <End Role="Courses" Type="Self.Cours" Multiplicity="0..1" />
-    <End Role="Courses1" Type="Self.Cours" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Courses">
-        <PropertyRef Name="Course_Id" />
-      </Principal>
-      <Dependent Role="Courses1">
-        <PropertyRef Name="dependent_Course" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Courses_Offered_Courses">
     <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
     <End Role="Courses_Offered" Type="Self.Courses_Offered" Multiplicity="*" />
@@ -388,18 +368,6 @@
       </Principal>
       <Dependent Role="Enrollments">
         <PropertyRef Name="Course_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Courses_Offered_Days">
-    <End Role="Days" Type="Self.Day" Multiplicity="0..1" />
-    <End Role="Courses_Offered" Type="Self.Courses_Offered" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Days">
-        <PropertyRef Name="Days_id" />
-      </Principal>
-      <Dependent Role="Courses_Offered">
-        <PropertyRef Name="Days_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -451,7 +419,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Project8Entities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Project8Entities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
@@ -461,7 +429,6 @@
     <EntitySet Name="Colleges" EntityType="Self.College" />
     <EntitySet Name="Courses" EntityType="Self.Cours" />
     <EntitySet Name="Courses_Offered" EntityType="Self.Courses_Offered" />
-    <EntitySet Name="Days" EntityType="Self.Day" />
     <EntitySet Name="Doctors" EntityType="Self.Doctor" />
     <EntitySet Name="Enrollments" EntityType="Self.Enrollment" />
     <EntitySet Name="Majors" EntityType="Self.Major" />
@@ -509,10 +476,6 @@
       <End Role="Majors" EntitySet="Majors" />
       <End Role="Courses" EntitySet="Courses" />
     </AssociationSet>
-    <AssociationSet Name="FK_Courses_Courses" Association="Self.FK_Courses_Courses">
-      <End Role="Courses" EntitySet="Courses" />
-      <End Role="Courses1" EntitySet="Courses" />
-    </AssociationSet>
     <AssociationSet Name="FK_Courses_Offered_Courses" Association="Self.FK_Courses_Offered_Courses">
       <End Role="Courses" EntitySet="Courses" />
       <End Role="Courses_Offered" EntitySet="Courses_Offered" />
@@ -520,10 +483,6 @@
     <AssociationSet Name="FK__Enrollmen__Cours__693CA210" Association="Self.FK__Enrollmen__Cours__693CA210">
       <End Role="Courses_Offered" EntitySet="Courses_Offered" />
       <End Role="Enrollments" EntitySet="Enrollments" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Courses_Offered_Days" Association="Self.FK_Courses_Offered_Days">
-      <End Role="Days" EntitySet="Days" />
-      <End Role="Courses_Offered" EntitySet="Courses_Offered" />
     </AssociationSet>
     <AssociationSet Name="FK_Courses_Offered_Doctors" Association="Self.FK_Courses_Offered_Doctors">
       <End Role="Doctors" EntitySet="Doctors" />
@@ -541,5 +500,46 @@
       <End Role="semesters" EntitySet="semesters" />
       <End Role="RegistrationPeriods" EntitySet="RegistrationPeriods" />
     </AssociationSet>
+    <EntitySet Name="Days" EntityType="Project8Model.Day" />
+    <AssociationSet Name="FK_Courses_Courses" Association="Project8Model.FK_Courses_Courses">
+      <End Role="Cours" EntitySet="Courses" />
+      <End Role="Cours1" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Courses_Offered_Days" Association="Project8Model.FK_Courses_Offered_Days">
+      <End Role="Day" EntitySet="Days" />
+      <End Role="Courses_Offered" EntitySet="Courses_Offered" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Day">
+    <Key>
+      <PropertyRef Name="Days_id" />
+    </Key>
+    <Property Name="Days_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Days" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Courses_Offered" Relationship="Project8Model.FK_Courses_Offered_Days" FromRole="Day" ToRole="Courses_Offered" />
+  </EntityType>
+  <Association Name="FK_Courses_Courses">
+    <End Type="Project8Model.Cours" Role="Cours" Multiplicity="0..1" />
+    <End Type="Project8Model.Cours" Role="Cours1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cours">
+        <PropertyRef Name="Course_Id" />
+      </Principal>
+      <Dependent Role="Cours1">
+        <PropertyRef Name="dependent_Course" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Courses_Offered_Days">
+    <End Type="Project8Model.Day" Role="Day" Multiplicity="0..1" />
+    <End Type="Project8Model.Courses_Offered" Role="Courses_Offered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Day">
+        <PropertyRef Name="Days_id" />
+      </Principal>
+      <Dependent Role="Courses_Offered">
+        <PropertyRef Name="Days_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

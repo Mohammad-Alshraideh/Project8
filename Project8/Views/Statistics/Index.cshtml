@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Project8.Models.AspNetUser>
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row" style="display:flex;justify-content:space-around">
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4" >
+        <div class="card">
+            <div class="card-body p-4" style="height:100px">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold" style="text-align:center"> Registered Students</p>
+                            <h4 class="font-weight-bolder mb-0" style="text-align:center ">
+                                @ViewBag.All
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-4 text-end">
+                            <i class="fa-solid fa-graduation-cap" text-lg opacity-10" aria-hidden="true" style="font-size:40px; color:blue;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-body p-4" style="height:100px">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold" style="text-align:center">Accepts Requests</p>
+                            <h4 class="font-weight-bolder mb-0" style="text-align:center ">
+                                @ViewBag.Accepted
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-4 text-end">
+                            <i class="fa-solid fa-check" text-lg opacity-10" aria-hidden="true" style="font-size: 40px; color: #5CFF5C;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-body p-4" style="height:100px">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold" style="text-align:center"> Rejected Requests</p>
+                            <h4 class="font-weight-bolder mb-0" style="text-align:center ">
+                                @ViewBag.Rejected
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-4 text-end">
+                            <i class="fa-solid fa-xmark" text-lg opacity-10" aria-hidden="true" style="font-size:40px; color:red;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-body p-4" style="height:100px">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold" style="text-align:center"> Pending Requests</p>
+                            <h4 class="font-weight-bolder mb-0" style="text-align:center ">
+                                @ViewBag.non
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-4 text-end">
+                            <i class="fa-solid fa-pause" text-lg opacity-10" aria-hidden="true" style="font-size: 40px; color: orange"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-body p-4" style="height:100px">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold" style="text-align:center">Number of Payments</p>
+                            <h4 class="font-weight-bolder mb-0" style="text-align:center ">
+                                @ViewBag.MyMoney
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-4 text-end">
+                            <i class="fa-solid fa-money-bill-trend-up" style="color: green; font-size: 40px" text-lg opacity-10" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-body p-4" style="height:100px">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold" style="text-align:center">Revenue</p>
+                            <h4 class="font-weight-bolder mb-0" style="text-align:center ">
+                                @ViewBag.Money
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-4 text-end">
+                            <i class="fa-solid fa-sack-dollar" text-lg opacity-10" aria-hidden="true" style="color: #00D100; font-size: 40px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<div style="display:flex;justify-content:space-around">
+    <img src="@Url.Action("CreatePie")" alt="Bar Chart using MVC" />
+
+</div>
+

@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Project8.Models.Major>
+@{
+    ViewBag.Title = "Majors";
+}
+
+<style>
+    .section {
+        padding: 50px 0;
+    }
+
+    .flex-row-stretch {
+        display: flex;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    .flex-col {
+        margin-bottom: 30px;
+    }
+
+
+
+
+    /* ======Cards======= */
+
+    .card {
+        position: relative;
+        height: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        text-align: left;
+        border-radius: 6px;
+        box-shadow: 0 4px 15px -2px rgba(0, 0, 0, .2);
+        -webkit-box-shadow: 0 4px 15px -2px rgba(0, 0, 0, .2);
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .card-body {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+    }
+
+    .card-label {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        font-size: 13px;
+        color: #fff;
+        background-color: #231f20;
+        padding: 7px 15px;
+    }
+
+    .card-photo {
+        background-position: 50% 50%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 170px;
+    }
+
+    .card p {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    .card h4 {
+        text-align: left !important;
+        margin: 0 0 13px;
+    }
+
+    .card a {
+        align-self: end;
+        margin-top: auto;
+    }
+</style>
+
+<section class="probootstrap-section probootstrap-section-colored">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-left section-heading probootstrap-animate">
+                <h1>Our Courses</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="probootstrap-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="probootstrap-flex-block">
+                    <div class="probootstrap-text probootstrap-animate">
+                        <div class="text-uppercase probootstrap-uppercase"></div>
+                        <h3>Accreditation</h3>
+                        <p>ABET accreditation provides assurance that a college or university program meets the quality standards of the profession for which that program prepares graduates.</p>
+                        <p><a href="https://www.abet.org/accreditation/" class="btn btn-primary">See details</a> </p>
+                    </div>
+                    <div class="probootstrap-image probootstrap-animate" style="background-image: url(/Coimg/abet.jpg)">
+                        <a href="https://www.youtube.com/watch?v=2RGCorwEHmg&ab_channel=%D9%85%D9%87%D9%86%D8%AF%D8%B3%2F%D8%AD%D8%B3%D8%A7%D9%85%D8%AD%D8%B3%D9%8A%D9%86" class="btn-video popup-vimeo"><i class="icon-play3"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="probootstrap-section">
+    <div class="container">
+        <div class="row">
+            <div class="section">
+                <div class="container">
+                    <div class="row flex-row-stretch " style="justify-content:center; ">
+                        @foreach (var item in Model)
+                        {
+
+
+                            <div class="col-sm-6 col-md-5 col-lg-5 flex-col">
+                                <div class="card">
+                                    <div class="card-photo" style="background-image: url(../../Images/@item.Major_Image );"></div>
+                                    <div class="card-body">
+                                        <h4>@item.Major_Name</h4>
+                                      
+                                        <p>@item.Major_Description</p>
+                                        <a class="btn btn-primary" href="/Home/singleMajor/@item.Major_Id">View more</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            @*<div class="col-md-6">
+                                <div class="probootstrap-service-2 probootstrap-animate">
+                                    <div class="image">
+                                        <div class="image-bg">
+                                            <img src="@item.College_Image" style="height:400px; " alt="Free Bootstrap Template by ProBootstrap.com">
+                                        </div>
+                                    </div>
+                                    <div class="text">
+                                        <span class="probootstrap-meta"></span>
+                                        <h3>@item.College_Name</h3>
+                                        <p>@item.College_Description</p>
+                                        <p><a href="#" class="btn btn-primary">See All Majors</a> <span class="enrolled-count">2,928 students enrolled</span></p>
+                                    </div>
+                                </div>*@
+
+
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

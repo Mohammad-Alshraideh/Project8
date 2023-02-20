@@ -11,7 +11,8 @@ namespace Project8.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Courses_Offered
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,22 +22,28 @@ namespace Project8.Models
         }
     
         public int offered_id { get; set; }
+        [Required]
+        [Display(Name="Course Name")]
         public int course_id { get; set; }
         public System.TimeSpan start_time { get; set; }
         public System.TimeSpan end_time { get; set; }
+        [Required]
+        [Display(Name = "Doctor")]
         public int doctor_id { get; set; }
         public Nullable<int> semester_id { get; set; }
         public Nullable<int> Seat_Count { get; set; }
         public string Hall { get; set; }
         public Nullable<int> Capacity { get; set; }
         public Nullable<int> Registered { get; set; }
+        [Required]
+        [Display(Name = "Days")]
         public Nullable<int> Days_id { get; set; }
     
         public virtual Cours Cours { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Enrollment> Enrollments { get; set; }
-        public virtual Day Day { get; set; }
         public virtual Doctor Doctor { get; set; }
         public virtual semester semester { get; set; }
+        public virtual Day Day { get; set; }
     }
 }

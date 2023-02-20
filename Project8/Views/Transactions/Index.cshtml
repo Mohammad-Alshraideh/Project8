@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Project8.Models.Transaction>
+
+@{
+    ViewBag.Title = "Transactions";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Transactions</h2>
+
+<p>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Transaction_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.User_Action)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td> 
+            @Html.DisplayFor(modelItem => item.Transaction_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+
+        <td>
+            @{
+                if (item.User_Action == true) 
+                {<span>Deposit</span> }
+                else 
+                {<span>Deduction</span> }
+
+            }
+        </td>
+        <td>
+            @{ 
+                if (item.User_Action == true)
+                {<span>+@Html.DisplayFor(modelItem => item.Amount)</span>  }
+            
+                else 
+                {<span>-@Html.DisplayFor(modelItem => item.Amount)</span> }
+
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Transaction_Id }) 
+        </td>
+    </tr>
+}
+
+</table>

@@ -11,7 +11,8 @@ namespace Project8.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class College
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +20,17 @@ namespace Project8.Models
         {
             this.Majors = new HashSet<Major>();
         }
-    
+        [Required]
+        [Display(Name = "College Name")]
         public int College_Id { get; set; }
+        [Required]
+        [Display(Name = "College Name")]
         public string College_Name { get; set; }
+        [Required]
+        [Display(Name = "College Description")]
         public string College_Description { get; set; }
+        [Required]
+        [Display(Name = "College Image")]
         public string College_Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

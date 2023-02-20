@@ -141,8 +141,9 @@ namespace Project8.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register( int majid)
         {
+            Session["token"] = majid;
             return View();
         }
 
@@ -180,7 +181,7 @@ namespace Project8.Controllers
                     string degreepath = guid3 + "-" + highschooldegree.FileName;
                     highschooldegree.SaveAs(Server.MapPath("../Images/"+ degreepath));
                     student.Balance = 0;
-                 
+                    student.Major_Id =Convert.ToInt32( Session["token"]);
                     
                     db.SaveChanges();
                     var role = new AspNetUserRole();

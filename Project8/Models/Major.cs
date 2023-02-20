@@ -11,7 +11,8 @@ namespace Project8.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Major
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,8 +23,14 @@ namespace Project8.Models
         }
     
         public int Major_Id { get; set; }
+        [Required]
+        [Display(Name = "Name")]
         public string Major_Name { get; set; }
+        [Required]
+        [Display(Name = "Description")]
         public string Major_Description { get; set; }
+        [Required]
+        [Display(Name = "Image")]
         public string Major_Image { get; set; }
         public Nullable<int> Price { get; set; }
         public Nullable<int> College_Id { get; set; }

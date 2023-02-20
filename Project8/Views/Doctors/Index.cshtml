@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Project8.Models.Doctor>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Doctors";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <style>
@@ -17,7 +17,7 @@
         }
 </style>
 
-<h2>Index</h2>
+<h2>Doctors</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -58,7 +58,7 @@
         </td>
         
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Doctor_Id }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.Doctor_Id }) |*@
             @Html.ActionLink("Details", "Details", new { id=item.Doctor_Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Doctor_Id })
         </td>

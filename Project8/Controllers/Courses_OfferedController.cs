@@ -17,7 +17,7 @@ namespace Project8.Controllers
         // GET: Courses_Offered
         public ActionResult Index()
         {
-            var courses_Offered = db.Courses_Offered.Include(c => c.Cours).Include(c => c.Doctor).Include(c => c.semester);
+            var courses_Offered = db.Courses_Offered.Include(c => c.Cours).Include(c => c.Doctor).Include(c => c.semester).Include(c => c.Day);
             return View(courses_Offered.ToList());
         }
 
@@ -42,6 +42,7 @@ namespace Project8.Controllers
             ViewBag.course_id = new SelectList(db.Courses, "Course_Id", "Course_Name");
             ViewBag.doctor_id = new SelectList(db.Doctors, "Doctor_Id", "Doctor_Name");
             ViewBag.semester_id = new SelectList(db.semesters, "id", "name");
+            ViewBag.Days_id = new SelectList(db.Days, "Days_id", "Days");
             return View();
         }
 
@@ -50,14 +51,10 @@ namespace Project8.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "course_id,start_time,end_time,doctor_id,semester_id")] Courses_Offered courses_Offered,string start_Hour,string start_min ,string end_Hour , string end_min  )
+        public ActionResult Create([Bind(Include = "offered_id,course_id,start_time,end_time,doctor_id,semester_id,Seat_Count,Hall,Capacity,Registered,Days_id")] Courses_Offered courses_Offered)
         {
             if (ModelState.IsValid)
             {
-                string startTime = start_Hour + ":" + start_min;
-                courses_Offered.start_time =TimeSpan.Parse(startTime);
-                string endTime=end_Hour+ ":" + end_min; 
-                courses_Offered.end_time=TimeSpan.Parse(endTime);
                 db.Courses_Offered.Add(courses_Offered);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -66,6 +63,7 @@ namespace Project8.Controllers
             ViewBag.course_id = new SelectList(db.Courses, "Course_Id", "Course_Name", courses_Offered.course_id);
             ViewBag.doctor_id = new SelectList(db.Doctors, "Doctor_Id", "Doctor_Name", courses_Offered.doctor_id);
             ViewBag.semester_id = new SelectList(db.semesters, "id", "name", courses_Offered.semester_id);
+            ViewBag.Days_id = new SelectList(db.Days, "Days_id", "Days", courses_Offered.Days_id);
             return View(courses_Offered);
         }
 
@@ -84,6 +82,7 @@ namespace Project8.Controllers
             ViewBag.course_id = new SelectList(db.Courses, "Course_Id", "Course_Name", courses_Offered.course_id);
             ViewBag.doctor_id = new SelectList(db.Doctors, "Doctor_Id", "Doctor_Name", courses_Offered.doctor_id);
             ViewBag.semester_id = new SelectList(db.semesters, "id", "name", courses_Offered.semester_id);
+            ViewBag.Days_id = new SelectList(db.Days, "Days_id", "Days", courses_Offered.Days_id);
             return View(courses_Offered);
         }
 
@@ -92,20 +91,10 @@ namespace Project8.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "offered_id,course_id,start_time,end_time,doctor_id,semester_id")] Courses_Offered courses_Offered, string start_Hour, string start_min, string end_Hour, string end_min)
+        public ActionResult Edit([Bind(Include = "offered_id,course_id,start_time,end_time,doctor_id,semester_id,Seat_Count,Hall,Capacity,Registered,Days_id")] Courses_Offered courses_Offered)
         {
             if (ModelState.IsValid)
             {
-                if (start_Hour != null||start_min!=null) { 
-                string startTime = start_Hour + ":" + start_min;
-
-                courses_Offered.start_time = TimeSpan.Parse(startTime);
-                }
-                if (end_Hour != null || end_min != null)
-                {
-                    string endTime = end_Hour + ":" + end_min;
-                    courses_Offered.end_time = TimeSpan.Parse(endTime);
-                }
                 db.Entry(courses_Offered).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -113,6 +102,7 @@ namespace Project8.Controllers
             ViewBag.course_id = new SelectList(db.Courses, "Course_Id", "Course_Name", courses_Offered.course_id);
             ViewBag.doctor_id = new SelectList(db.Doctors, "Doctor_Id", "Doctor_Name", courses_Offered.doctor_id);
             ViewBag.semester_id = new SelectList(db.semesters, "id", "name", courses_Offered.semester_id);
+            ViewBag.Days_id = new SelectList(db.Days, "Days_id", "Days", courses_Offered.Days_id);
             return View(courses_Offered);
         }
 

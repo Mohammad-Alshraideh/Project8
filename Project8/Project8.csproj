@@ -175,11 +175,16 @@
     <Compile Include="Controllers\CollegesController.cs" />
     <Compile Include="Controllers\CoursController.cs" />
     <Compile Include="Controllers\Courses_OfferedController.cs" />
+    <Compile Include="Controllers\dashboard_layoutController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MajorsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OurDoctorsController.cs" />
+    <Compile Include="Controllers\RegistrationPeriodsController.cs" />
+    <Compile Include="Controllers\semestersController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -256,6 +261,20 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Coimg\1 %281%29.jpg" />
+    <Content Include="Coimg\1 %282%29.jpg" />
+    <Content Include="Coimg\1 %283%29.jpg" />
+    <Content Include="Coimg\9 %281%29.jpg" />
+    <Content Include="Coimg\9 %281%29.png" />
+    <Content Include="Coimg\9 %282%29.jpg" />
+    <Content Include="Coimg\9 %282%29.png" />
+    <Content Include="Coimg\abet.jpg" />
+    <Content Include="Coimg\chemical.jpg" />
+    <Content Include="Coimg\cit.jpg" />
+    <Content Include="Coimg\civil.jpg" />
+    <Content Include="Coimg\Eng.jpg" />
+    <Content Include="Coimg\med.jpg" />
+    <Content Include="Coimg\ph.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -347,6 +366,32 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="gulpfile.js" />
+    <Content Include="Images\New folder\1f63540d-377e-4f43-bed4-f5a211b0e45d-Background %282%29.jpg" />
+    <Content Include="Images\New folder\220a7960-fb42-4922-a164-8d8ca9c9d145-background.jpg" />
+    <Content Include="Images\New folder\23de1f38-20ac-4286-8663-ad5c6fe3c217-background.jpg" />
+    <Content Include="Images\New folder\3fb491fc-07d6-4a49-a807-f68d0b501811-bg_2.jpg" />
+    <Content Include="Images\New folder\441ff636-5faf-41a8-9765-bd10bad45e04-nsreen.jpg" />
+    <Content Include="Images\New folder\4b523392-5a37-4538-b240-8afdb7fc2782-nsreen.jpg" />
+    <Content Include="Images\New folder\60516acd-2f13-4a85-bc97-7efb690e8a9f-1665474749670.jfif" />
+    <Content Include="Images\New folder\63db35b0-4f47-44d7-93ac-0247f26a7984-bg_2.jpg" />
+    <Content Include="Images\New folder\68626cf0-f445-434a-97e5-d74c8a19685e-gallery-1.jpg" />
+    <Content Include="Images\New folder\68ea0f02-d439-4a3e-8862-40007553bdb9-gallery-2.jpg" />
+    <Content Include="Images\New folder\6b88e7cb-50fd-4d59-8c86-16c5ec6a8485-bg_2.jpg" />
+    <Content Include="Images\New folder\6db26f3d-abff-4dfb-aae8-62d0c94d74c5-F1.jpeg" />
+    <Content Include="Images\New folder\768ac8f8-c809-4bf0-8bc2-d2ffd9f93e38-nsreen.jpg" />
+    <Content Include="Images\New folder\861f54bf-20b1-438a-97f2-32dc45f16f31-1654188890849.jfif" />
+    <Content Include="Images\New folder\8c742fe2-2d3c-473d-ba56-3e1d7c7af1d5-odai.png" />
+    <Content Include="Images\New folder\8e5124a7-eb5a-4727-807c-fe0e3d0c4162-F1.jpeg" />
+    <Content Include="Images\New folder\8f921e41-3570-4293-8928-38b7d5ae039b-nsreen.jpg" />
+    <Content Include="Images\New folder\9a7ff23e-ea42-4b9f-9c81-a21a4efdf2b6-gallery-3.jpg" />
+    <Content Include="Images\New folder\a2211284-153a-4305-8cb2-fbf848401c2e-gallery-2.jpg" />
+    <Content Include="Images\New folder\aa424e9e-bb27-4b39-a8b7-fb8c2994f3fc-gallery-4.jpg" />
+    <Content Include="Images\New folder\ba3c52ab-cbd1-43f5-9c7f-f2b9fa6c90b7-bg_2.jpg" />
+    <Content Include="Images\New folder\ded35f7b-7a16-4837-8c49-d94b604290ae-1665474749670.jfif" />
+    <Content Include="Images\New folder\e98fc8d0-4d2f-4230-8e63-9f7bc8899b9b-1654188890849.jfif" />
+    <Content Include="Images\New folder\ef03e0fb-4c64-4e82-9cc4-f4cf3f5ffe77-aa.PNG" />
+    <Content Include="Images\New folder\f573e049-3831-4654-8851-3ddacf977f1a-odai.png" />
+    <Content Include="Images\New folder\FjU2lkcWYAgNG6d.jpg" />
     <Content Include="img\client_1.png" />
     <Content Include="img\client_2.png" />
     <Content Include="img\client_3.png" />
@@ -433,6 +478,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Images\New folder\993ac347-9332-492b-b0e2-971e7d111cff-bg_1.jpg.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -470,12 +516,6 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="scss\style.scss" />
@@ -490,37 +530,58 @@
     <Content Include="Views\Colleges\Create.cshtml" />
     <Content Include="Views\Colleges\Delete.cshtml" />
     <Content Include="Views\Colleges\Details.cshtml" />
+    <Content Include="Views\Colleges\Edit.cshtml" />
     <Content Include="Views\Colleges\Index.cshtml" />
     <Content Include="Views\Majors\Create.cshtml" />
     <Content Include="Views\Majors\Delete.cshtml" />
     <Content Include="Views\Majors\Details.cshtml" />
     <Content Include="Views\Majors\Edit.cshtml" />
     <Content Include="Views\Majors\Index.cshtml" />
-    <Content Include="Views\Cours\Create.cshtml" />
-    <Content Include="Views\Cours\Delete.cshtml" />
-    <Content Include="Views\Cours\Details.cshtml" />
-    <Content Include="Views\Cours\Edit.cshtml" />
-    <Content Include="Views\Cours\Index.cshtml" />
     <Content Include="Views\Doctors\Create.cshtml" />
     <Content Include="Views\Doctors\Delete.cshtml" />
     <Content Include="Views\Doctors\Details.cshtml" />
     <Content Include="Views\Doctors\Edit.cshtml" />
     <Content Include="Views\Doctors\Index.cshtml" />
+    <Content Include="Views\Transactions\Details.cshtml" />
+    <Content Include="Views\Transactions\Index.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\semesters\Create.cshtml" />
+    <Content Include="Views\semesters\Delete.cshtml" />
+    <Content Include="Views\semesters\Details.cshtml" />
+    <Content Include="Views\semesters\Edit.cshtml" />
+    <Content Include="Views\semesters\Index.cshtml" />
+    <Content Include="Views\RegistrationPeriods\Create.cshtml" />
+    <Content Include="Views\RegistrationPeriods\Delete.cshtml" />
+    <Content Include="Views\RegistrationPeriods\Details.cshtml" />
+    <Content Include="Views\RegistrationPeriods\Edit.cshtml" />
+    <Content Include="Views\RegistrationPeriods\Index.cshtml" />
+    <Content Include="Views\Cours\Create.cshtml" />
+    <Content Include="Views\Cours\Delete.cshtml" />
+    <Content Include="Views\Cours\Details.cshtml" />
+    <Content Include="Views\Cours\Edit.cshtml" />
+    <Content Include="Views\Cours\Index.cshtml" />
     <Content Include="Views\Courses_Offered\Create.cshtml" />
     <Content Include="Views\Courses_Offered\Delete.cshtml" />
     <Content Include="Views\Courses_Offered\Details.cshtml" />
     <Content Include="Views\Courses_Offered\Edit.cshtml" />
     <Content Include="Views\Courses_Offered\Index.cshtml" />
-    <Content Include="Views\Colleges\Edit.cshtml" />
-    <Content Include="Views\OurDoctors\Create.cshtml" />
-    <Content Include="Views\OurDoctors\Delete.cshtml" />
-    <Content Include="Views\OurDoctors\Details.cshtml" />
-    <Content Include="Views\OurDoctors\Edit.cshtml" />
-    <Content Include="Views\OurDoctors\Index.cshtml" />
+    <Content Include="Views\Home\Collages.cshtml" />
+    <Content Include="Views\Home\Majors.cshtml" />
+    <Content Include="Views\Home\singleMajor.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\Registration.cshtml" />
+    <Content Include="Views\Manage\schedule.cshtml" />
+    <Content Include="Views\Manage\Errors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
+    <Folder Include="Views\dashboard_layout\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

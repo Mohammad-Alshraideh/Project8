@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,8 +17,7 @@ namespace Project8.Controllers
         // GET: Cours
         public ActionResult Index()
         {
-            var courses = db.Courses.Include(c => c.Major);
-            dynamic mymodel = new ExpandoObject();
+            var courses = db.Courses.Include(c => c.Major).Include(c => c.Cours1);
             return View(courses.ToList());
         }
 
@@ -42,6 +40,11 @@ namespace Project8.Controllers
         public ActionResult Create()
         {
             ViewBag.Major_Id = new SelectList(db.Majors, "Major_Id", "Major_Name");
+            //ViewBag.dependent_Course = new SelectList(db.Courses, "Course_Id", "Course_Name");
+            List<SelectListItem> courseList = new List<SelectListItem>();
+            courseList.Add(new SelectListItem { Text = "Select a course", Value = null });
+            courseList.AddRange(db.Courses.Select(c => new SelectListItem { Text = c.Course_Name, Value = c.Course_Id.ToString() }));
+            ViewBag.dependent_Course = new SelectList(courseList, "Value", "Text");
             return View();
         }
 
@@ -50,7 +53,7 @@ namespace Project8.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Course_Id,Course_Name,Number_Of_Hours,Course_Description,Major_Id,syllabus")] Cours cours)
+        public ActionResult Create([Bind(Include = "Course_Id,Course_Name,Number_Of_Hours,Course_Description,Major_Id,syllabus,dependent_Course")] Cours cours)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +63,7 @@ namespace Project8.Controllers
             }
 
             ViewBag.Major_Id = new SelectList(db.Majors, "Major_Id", "Major_Name", cours.Major_Id);
+            ViewBag.dependent_Course = new SelectList(db.Courses, "Course_Id", "Course_Name", cours.dependent_Course);
             return View(cours);
         }
 
@@ -76,6 +80,7 @@ namespace Project8.Controllers
                 return HttpNotFound();
             }
             ViewBag.Major_Id = new SelectList(db.Majors, "Major_Id", "Major_Name", cours.Major_Id);
+            ViewBag.dependent_Course = new SelectList(db.Courses, "Course_Id", "Course_Name", cours.dependent_Course);
             return View(cours);
         }
 
@@ -84,7 +89,7 @@ namespace Project8.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Course_Id,Course_Name,Number_Of_Hours,Course_Description,Major_Id,syllabus")] Cours cours)
+        public ActionResult Edit([Bind(Include = "Course_Id,Course_Name,Number_Of_Hours,Course_Description,Major_Id,syllabus,dependent_Course")] Cours cours)
         {
             if (ModelState.IsValid)
             {
@@ -93,6 +98,7 @@ namespace Project8.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Major_Id = new SelectList(db.Majors, "Major_Id", "Major_Name", cours.Major_Id);
+            ViewBag.dependent_Course = new SelectList(db.Courses, "Course_Id", "Course_Name", cours.dependent_Course);
             return View(cours);
         }
 

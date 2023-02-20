@@ -19,7 +19,21 @@ namespace Project8.Controllers
 
         // GET: AspNetUsers
         public ActionResult Index()
+        {     
+
+            var aspNetUsers = db.AspNetUsers.Include(a => a.Major);
+            return View(aspNetUsers.ToList());
+        }
+        [HttpPost]
+        public ActionResult Index(string search5)
         {
+            if (search5 != null)
+            {
+                var abumahmood = db.AspNetUsers.Where(x => x.Email.Contains(search5)).ToList();
+
+                return View(abumahmood);
+            }
+
             var aspNetUsers = db.AspNetUsers.Include(a => a.Major);
             return View(aspNetUsers.ToList());
         }
@@ -108,7 +122,7 @@ namespace Project8.Controllers
             db.SaveChanges();
             MailMessage mail = new MailMessage();
             mail.To.Add(student.Email);
-            mail.From = new MailAddress("nsreennedal@gmail.com");
+            mail.From = new MailAddress("jaberfahd2233@gmail.com");
             mail.Subject = "Accept";
 
             mail.Body = "Wellcom";
@@ -119,7 +133,7 @@ namespace Project8.Controllers
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
             smtp.Host = "smtp.gmail.com";
-            smtp.Credentials = new System.Net.NetworkCredential("nsreennedal", "jmvcufnewgrwmaov");
+            smtp.Credentials = new System.Net.NetworkCredential("jaberfahd2233", "obsrmfoexbukaspu");
             smtp.Send(mail);
             return View("Index",db.AspNetUsers.ToList());
         }
@@ -130,7 +144,7 @@ namespace Project8.Controllers
             db.SaveChanges();
             MailMessage mail = new MailMessage();
             mail.To.Add(student.Email);
-            mail.From = new MailAddress("nsreennedal@gmail.com");
+            mail.From = new MailAddress("jaberfahd2233@gmail.com");
             mail.Subject = "Reject";
 
             mail.Body = "Wellcom";
@@ -141,7 +155,7 @@ namespace Project8.Controllers
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
             smtp.Host = "smtp.gmail.com";
-            smtp.Credentials = new System.Net.NetworkCredential("nsreennedal", "jmvcufnewgrwmaov");
+            smtp.Credentials = new System.Net.NetworkCredential("jaberfahd2233", "obsrmfoexbukaspu");
             smtp.Send(mail);
             return View("Index", db.AspNetUsers.ToList());
         }
@@ -179,5 +193,10 @@ namespace Project8.Controllers
             }
             base.Dispose(disposing);
         }
+        //public ActionResult Search(string search)
+        //{
+        //    var abumahmood = db.AspNetUsers.Where(x => x.Email.Contains(search)).ToList();
+        //    return View("Index",abumahmood);
+        //}
     }
 }

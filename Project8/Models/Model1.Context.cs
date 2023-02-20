@@ -34,7 +34,6 @@ namespace Project8.Models
         public virtual DbSet<College> Colleges { get; set; }
         public virtual DbSet<Cours> Courses { get; set; }
         public virtual DbSet<Courses_Offered> Courses_Offered { get; set; }
-        public virtual DbSet<Day> Days { get; set; }
         public virtual DbSet<Doctor> Doctors { get; set; }
         public virtual DbSet<Enrollment> Enrollments { get; set; }
         public virtual DbSet<Major> Majors { get; set; }
@@ -42,5 +41,6 @@ namespace Project8.Models
         public virtual DbSet<semester> semesters { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Day> Days { get; set; }
     }
 }

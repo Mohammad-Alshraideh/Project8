@@ -1,0 +1,67 @@
+﻿
+@model IEnumerable<Project8.Models.Enrollment>
+
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registration</h2>
+
+<form method="post">
+
+    Enter Course ID <input type="number" name="Course_id" id="Course_id" class="form-control" />
+    <button type="submit">Submet</button>
+</form>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (TempData["swal_message"] != null)
+{
+    <script>
+    swal({
+      title: "@ViewBag.title",
+      text: "@TempData["swal_message"]",
+      icon: "@ViewBag.icon"
+    });
+    </script>
+}
+<div class="table-stats order-table ov-h">
+    <table class="table ">
+        <thead>
+            <tr>
+
+                <th class="avatar">Course NAme</th>
+                <th>Nomber Of Hours</th>
+                <th>Course Days</th>
+                <th>Time</th>
+                <th>Hall</th>
+                <th>Capacity</th>
+                <th>Registered</th>
+                <th>Doctor</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Courses_Offered.Cours.Course_Name</td>
+                    <td>  <span class="name">@item.Courses_Offered.Cours.Number_Of_Hours</span> </td>
+                    <td>  <span class="name">@item.Courses_Offered.Day.Days</span> </td>
+                    <td> <span class="product">@item.Courses_Offered.start_time -- @item.Courses_Offered.end_time</span> </td>
+                    <td>@item.Courses_Offered.Hall</td>
+
+                    <td>@item.Courses_Offered.Capacity</td>
+                    <td>  <span class="name">@item.Courses_Offered.Registered</span> </td>
+                    <td> <span class="product">@item.Courses_Offered.Doctor.Doctor_Name</span> </td>
+                    <td>
+                        <form method="post">
+                            <button value="@item.Enrollment_Id" id="delete" name="delete" class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

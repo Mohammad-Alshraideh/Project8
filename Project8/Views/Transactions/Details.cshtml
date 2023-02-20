@@ -1,0 +1,83 @@
+﻿@model Project8.Models.Transaction
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Transaction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CardNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CVC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CVC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Visa_ExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Visa_ExpireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Action)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Action)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Transaction_Id }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

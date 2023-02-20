@@ -11,19 +11,26 @@ namespace Project8.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Cours
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cours()
         {
-            this.Courses1 = new HashSet<Cours>();
             this.Courses_Offered = new HashSet<Courses_Offered>();
+            this.Courses1 = new HashSet<Cours>();
         }
     
         public int Course_Id { get; set; }
+        [Required]
+        [Display(Name = "Course Name")]
         public string Course_Name { get; set; }
+        [Required]
+        [Display(Name = "Course Hours")]
         public Nullable<int> Number_Of_Hours { get; set; }
+        [Required]
+        [Display(Name = "Course Description")]
         public string Course_Description { get; set; }
         public Nullable<int> Major_Id { get; set; }
         public string syllabus { get; set; }
@@ -31,9 +38,9 @@ namespace Project8.Models
     
         public virtual Major Major { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Courses_Offered> Courses_Offered { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cours> Courses1 { get; set; }
         public virtual Cours Cours1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Courses_Offered> Courses_Offered { get; set; }
     }
 }

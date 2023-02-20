@@ -1,6 +1,6 @@
 ﻿
 
-
+@using System.Web.Mvc.Html
 
 
 @{
@@ -133,8 +133,8 @@
             -webkit-border-radius: 0px;
             border-radius: 0px;
         }
- 
- 
+
+
 
             .nav-email li a i {
                 margin-right: 5px;
@@ -478,577 +478,586 @@
         .progress-meter > .meter.meter-right > .meter-text {
             text-align: right;
         }
+        body{
+            background-color:white;
+        }
 </style>
 <hr />
- 
 
 
 
 
-    <div class="row">
-       
+
+<div class="row">
 
 
-     
-     
 
-            <!-- resumt -->
-            @*@if (ViewBag.sender == "MyInformation")
+
+
+
+    <!-- resumt -->
+    @*@if (ViewBag.sender == "MyInformation")
+        {
+
+
+            <div class="col-xs-12 col-sm-4">
+                <figure>
+
+                    <img class="img-responsive" alt="" src="~/Images/@Model.user_image">
+
+                </figure>
+                <div class="row">
+
+
+
+                </div>
+            </div>
+        }*@
+
+    <div class="container">
+
+        <div class="container" style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);">
+
+            <ul class="nav nav-pills  nav-email shadow mb-20 mt-3">
+
+
+                @if (ViewBag.sender == "MyInformation")
                 {
 
 
-                    <div class="col-xs-12 col-sm-4">
-                        <figure>
-
-                            <img class="img-responsive" alt="" src="~/Images/@Model.user_image">
-
-                        </figure>
-                        <div class="row">
+                    <li class="active">
 
 
-
-                        </div>
-                    </div>
-                }*@
-
-            <div class="container">
-
-                <div class="container" style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);">
-
-                    <ul class="nav nav-pills  nav-email shadow mb-20 mt-3">
-
-
-                        @if (ViewBag.sender == "MyInformation")
-                        {
-
-
-                            <li class="active">
-
-
-                                <a href="~/Manage/index ">
-                                    <i class="fa fa-inbox"></i> My Information
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-
-
-                                <a href="~/Manage/index ">
-                                    <i class="fa fa-inbox"></i> My Information
-                                </a>
-                            </li>
-                        }
-
-
-
-
-                        @if (ViewBag.sender == "MyCourses")
-                        {
-
-
-                            <li class="active">
-
-                                <a href="~/Manage/MyCourses"><i class="fa fa-envelope-o"></i> My Courses</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-
-                                <a href="~/Manage/MyCourses"><i class="fa fa-envelope-o"></i> My Courses</a>
-                            </li>
-                        }
-
-                        @if (ViewBag.sender == "Balance")
-                        {
-
-
-                            <li class="active">
-                                <a href="~/Manage/Balance"><i class="fa fa-certificate"></i> Balance</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a href="~/Manage/Balance"><i class="fa fa-certificate"></i> Balance</a>
-                            </li>
-                        }
-
-                        @if (ViewBag.sender == "ManageProfile")
-                        {
-
-
-                            <li class="active">
-                                <a href="~/Manage/ManageProfile">
-                                    <i class="fa fa-file-text-o"></i> Manage Profile
-                                </a>
-
-
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a href="~/Manage/ManageProfile">
-                                    <i class="fa fa-file-text-o"></i> Manage Profile
-                                </a>
-                            </li>
-                        }
-                    <li class="pull-right">
-                       <br />
-                        <label class="col-12 control-label">Balance: @ViewBag.CurrentBalance Jd</label>
+                        <a href="~/Manage/index ">
+                            <i class="fa fa-inbox"></i> My Information
+                        </a>
                     </li>
-                    </ul>
-               
-                    <hr />
-                    <div class="main-body">
-
-                        <!-- Breadcrumb -->
-                        <!-- /Breadcrumb -->
-
-                        <div class="row gutters-sm">
+                }
+                else
+                {
+                    <li>
 
 
+                        <a href="~/Manage/index ">
+                            <i class="fa fa-inbox"></i> My Information
+                        </a>
+                    </li>
+                }
 
 
 
 
-                            @if (ViewBag.sender == "MyInformation")
-                            {
-                                <div class="col-md-4 mb-3">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); margin-bottom:15px;">
-                                                <img src="~/Images/@Model.user_image" style="width:100%;">
+                @if (ViewBag.sender == "MyCourses")
+                {
 
-                                            </div>
-                                        </div>
+
+                    <li class="active">
+
+                        <a href="~/Manage/MyCourses"><i class="fa fa-envelope-o"></i> My Courses</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+
+                        <a href="~/Manage/MyCourses"><i class="fa fa-envelope-o"></i> My Courses</a>
+                    </li>
+                }
+
+                @if (ViewBag.sender == "Balance")
+                {
+
+
+                    <li class="active">
+                        <a href="~/Manage/Balance"><i class="fa fa-certificate"></i> Balance</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="~/Manage/Balance"><i class="fa fa-certificate"></i> Balance</a>
+                    </li>
+                }
+
+                @if (ViewBag.sender == "ManageProfile")
+                {
+
+
+                    <li class="active">
+                        <a href="~/Manage/ManageProfile">
+                            <i class="fa fa-file-text-o"></i> Manage Profile
+                        </a>
+
+
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="~/Manage/ManageProfile">
+                            <i class="fa fa-file-text-o"></i> Manage Profile
+                        </a>
+                    </li>
+                }
+                <li class="pull-right">
+                    <br />
+                    <label class="col-12 control-label">Balance: @ViewBag.CurrentBalance Jd</label>
+                </li>
+            </ul>
+
+            <hr />
+            <div class="main-body">
+
+         
+
+                <div class="row gutters-sm">
+
+
+
+
+
+
+                    @if (ViewBag.sender == "MyInformation")
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); margin-bottom:15px;">
+                                        <img src="~/Images/@Model.user_image" style="width:100%;">
+
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
-                            }
-                            else if (ViewBag.sender == "Balance")
-                            {
-
-
-
-                                <div class="col-md-4 mb-3">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div>
-
-                                                <style>
-                                                    * {
-                                                        margin: 0;
-                                                        padding: 0;
-                                                        font-family: 'Montserrat', sans-serif;
-                                                    }
+                    }
+                    else if (ViewBag.sender == "Balance")
+                    {
 
 
 
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div>
 
-                                                    p {
-                                                        margin: 0px;
-                                                    }
+                                        <style>
+                                            * {
+                                                margin: 0;
+                                                padding: 0;
+                                                font-family: 'Montserrat', sans-serif;
+                                            }
 
 
 
 
-
-
-                                                    .btn.btn.btn-primary:hover {
-                                                        background-position: right center;
-                                                        color: #fff;
-                                                        text-decoration: none;
-                                                    }
+                                            p {
+                                                margin: 0px;
+                                            }
 
 
 
-                                                    .btn.btn-primary:hover .fas.fa-arrow-right {
-                                                        transform: translate(15px);
-                                                        transition: transform 0.2s ease-in;
-                                                    }
-
-                                                    .form-control {
-                                                        color: white;
-                                                        background-color: #223C60;
-                                                        border: 2px solid transparent;
-                                                        height: 60px;
-                                                        padding-left: 20px;
-                                                        vertical-align: middle;
-                                                    }
-
-                                                        .form-control:focus {
-                                                            color: white;
-                                                            background-color: #0C4160;
-                                                            border: 2px solid #2d4dda;
-                                                            box-shadow: none;
-                                                        }
-
-                                                    .text {
-                                                        font-size: 14px;
-                                                        font-weight: 600;
-                                                    }
-
-                                                    ::placeholder {
-                                                        font-size: 14px;
-                                                        font-weight: 600;
-                                                    }
-                                                </style>
-
-                                                @using (Html.BeginForm("Pay", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                                {
-                                                    <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);padding:20px;padding-bottom:0;margin-bottom:20px;">
-                                                        <div class="col-12">
-                                                            <div class="d-flex flex-column">
-                                                                <p class="text mb-1">Card Holder's Name</p>
-                                                                <input class="form-control mb-3" type="text" id="CardHolder" name="CardHolder" placeholder="Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="d-flex flex-column">
-                                                                <p class="text mb-1">Card Number</p>
-                                                                <input class="form-control mb-3" id="CardNumber" name="CardNumber" type="text" placeholder="1234 5678 435678">
-                                                            </div>
-                                                        </div>
-                                                        <div style="display:grid;grid-template-columns:49% 49%;justify-content:space-between;">
-                                                            <div class="col-6">
-                                                                <div class="d-flex flex-column">
-                                                                    <p class="text mb-1">Month</p>
-                                                                    <input class="form-control mb-3" type="text" placeholder="MM">
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <div class="d-flex flex-column">
-                                                                    <p class="text mb-1">Year</p>
-                                                                    <input class="form-control mb-3" type="text" placeholder="YY">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div style="display:grid;grid-template-columns:49% 49%;justify-content:space-between;">
-                                                            <div class="col-6">
-                                                                <div class="d-flex flex-column">
-                                                                    <p class="text mb-1">CVV/CVC</p>
-                                                                    <input class="form-control mb-3 pt-2 " id="CVC" name="CVC" type="password" placeholder="***">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <div class="d-flex flex-column">
-                                                                    <p class="text mb-1">Payment Amount</p>
-                                                                    <input class="form-control mb-3" id="PayButton" name="PayButton" type="number">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="btn btn-primary" style="margin-top:20px; border-radius:unset;margin-bottom:20px;">
-                                                            <button class='btn btn-primary' type='submit'>Pay »</button>
 
 
-                                                        </div>
-                                                    </div>
+
+                                            .btn.btn.btn-primary:hover {
+                                                background-position: right center;
+                                                color: #fff;
+                                                text-decoration: none;
+                                            }
+
+
+
+                                            .btn.btn-primary:hover .fas.fa-arrow-right {
+                                                transform: translate(15px);
+                                                transition: transform 0.2s ease-in;
+                                            }
+
+                                            .form-control {
+                                                color: white;
+                                                background-color: #223C60;
+                                                border: 2px solid transparent;
+                                                height: 60px;
+                                                padding-left: 20px;
+                                                vertical-align: middle;
+                                            }
+
+                                                .form-control:focus {
+                                                    color: white;
+                                                    background-color: #0C4160;
+                                                    border: 2px solid #2d4dda;
+                                                    box-shadow: none;
                                                 }
 
+                                            .text {
+                                                font-size: 14px;
+                                                font-weight: 600;
+                                            }
 
+                                            ::placeholder {
+                                                font-size: 14px;
+                                                font-weight: 600;
+                                            }
+                                        </style>
 
-
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-                            @if (ViewBag.sender == "ManageProfile")
-                            {
-                       
-                                <div class="col-md-4 mb-3">
-                                    <div class="card" >
-                                        <div class="card-body">
-                                            <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); padding:20px;">
-                                                <label class="col-12 control-label">Change Your Password</label>
-                                                 
-                                                @Html.Partial("~/Views/Manage/ChangePassword.cshtml")
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            }
-
-
-
-
-                        <div class="col-md-8">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <div class="row">
-
-                                        @if (ViewBag.sender == "MyInformation")
+                                        @using (Html.BeginForm("Pay", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                         {
-
-
-
-                                            <table class="table table-responsive" style="width:99%;">
-                                                <tr>
-                                                    <td>
-                                                        <strong>  First Name:</strong>
-                                                    </td>
-                                                    <td>
-                                                        @Model.First_Name
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>  Last Name:  </strong>
-                                                    </td>
-                                                    <td>
-                                                        @Model.Last_Name
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>  Email:  </strong>
-                                                    </td>
-                                                    <td>
-                                                        @Model.Email
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>  Phone Number:  </strong>
-                                                    </td>
-                                                    <td>
-                                                        @Model.PhoneNumber
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>    National Number:  </strong>
-                                                    </td>
-                                                    <td>
-                                                        @Model.National_Number
-
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>   HighSchool Avg:  </strong>
-                                                    </td>
-                                                    <td>
-                                                        @Model.HighSchool_Avg
-
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>   Major: </strong>
-                                                    </td>
-                                                    <td>
-                                                        @Model.Major
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>   Balance: </strong>
-                                                    </td>
-                                                    <td>
-                                                        @Model.Balance
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-
-
-
-
-                                        }
-                                        else if (ViewBag.sender == "MyCourses")
-                                        {
-                                            @Model.Name
-                                        }
-                                        else if (ViewBag.sender == "Balance")
-                                        {
-
-
-                                            <div id="smart-button-container" style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);width:95%;padding:50px 20px 0px 20px;">
-
-                                                <div style="text-align: center;">
-                                                    <div id="paypal-button-container">
-                                                        <p></p>
-                                                        <p></p>
-                                                        <p></p>
-                                                        <script src="https://www.paypal.com/sdk/js?client-id=AYOPFmJHKEp34Obn8Gp5EJhzo8qOotnJl2Y6lj3E72wh3UcV-V-gVaGPkM-bR-XvEfuvN5ZhSeOgZk6R&amp;enable-funding=venmo&amp;currency=USD" data-sdk-integration-source="button-factory"></script>
-                                                        <script>
-                                                            function initPayPalButton() {
-                                                                paypal.Buttons({
-                                                                    style: {
-                                                                        shape: 'rect',
-                                                                        color: 'gold',
-                                                                        layout: 'vertical',
-                                                                        label: 'paypal',
-
-                                                                    },
-
-                                                                    createOrder: function (data, actions) {
-                                                                        return actions.order.create({
-                                                                            purchase_units: [{ "description": "شراء حسابات ميرش باي امازون", "amount": { "currency_code": "USD", "value": 60 } }]
-                                                                        });
-                                                                    },
-
-                                                                    onApprove: function (data, actions) {
-                                                                        return actions.order.capture().then(function (orderData) {
-
-                                                                            // Full available details
-                                                                            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
-                                                                            // Show a success message within this page, e.g.
-                                                                            const element = document.getElementById('paypal-button-container');
-                                                                            element.innerHTML = '';
-                                                                            element.innerHTML = '<h3>Thank you for your payment!</h3>';
-
-                                                                            // Or go to another URL:  actions.redirect('thank_you.html');
-
-                                                                        });
-                                                                    },
-
-                                                                    onError: function (err) {
-                                                                        console.log(err);
-                                                                    }
-                                                                }).render('#paypal-button-container');
-                                                            }
-                                                            initPayPalButton();
-                                                        </script>
+                                            <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);padding:20px;padding-bottom:0;margin-bottom:20px;">
+                                                <div class="col-12">
+                                                    <div class="d-flex flex-column">
+                                                        <p class="text mb-1">Card Holder's Name</p>
+                                                        <input class="form-control mb-3" type="text" id="CardHolder" name="CardHolder" placeholder="Name">
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="col-12">
+                                                    <div class="d-flex flex-column">
+                                                        <p class="text mb-1">Card Number</p>
+                                                        <input class="form-control mb-3" id="CardNumber" name="CardNumber" type="text" placeholder="1234 5678 435678">
+                                                    </div>
+                                                </div>
+                                                <div style="display:grid;grid-template-columns:49% 49%;justify-content:space-between;">
+                                                    <div class="col-6">
+                                                        <div class="d-flex flex-column">
+                                                            <p class="text mb-1">Month</p>
+                                                            <input class="form-control mb-3" type="text" placeholder="MM">
 
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex flex-column">
+                                                            <p class="text mb-1">Year</p>
+                                                            <input class="form-control mb-3" type="text" placeholder="YY">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-                                        else if (ViewBag.sender == "ManageProfile")
-                                        {
-                                            <div class="col-md-12 mb-3">
-                                                <div class="card">
-                                                    <div class="card-body">
-
-                                                        <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);width:95%;padding:20px;margin-bottom:20px;">
-                                                            <label class="col-12 control-label">Current Phone Number: @ViewBag.PhoneNumber</label>
-                                                          
-
-                                                            @using (Html.BeginForm("ChangePhone", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                                            {
-                                                                @Html.AntiForgeryToken()
-
-                                                                @Html.ValidationSummary("", new { @class = "text-danger" })
-                                                                <table class="table">
-                                                                    <tr>
-                                                                        <td>
-                                                                            <label class="col-12 control-label">New Phone Number</label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <input class="form-control" name="Pnumber" id="Pnumber" />
-
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td>
-                                                                            <input type="submit" class="btn btn-primary" />
-                                                                        </td>
-                                                                        <td>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-
-                                                            }
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-md-12 mb-3">
-                                                <div class="card">
-                                                    <div class="card-body">
-
-                                                        <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);padding:20px;width:95%;margin-bottom:20px;">
-                                                            <label class="col-12 control-label">Current Email: this@gmail.com</label>
-                                                            
-
-                                                            @using (Html.BeginForm("ChangeEmail", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                                            {
-                                                                @Html.AntiForgeryToken()
-
-                                                                @Html.ValidationSummary("", new { @class = "text-danger" })
-                                                                <table class="table">
-                                                                    <tr>
-                                                                        <td>
-                                                                            <label class="col-12 control-label">New Email</label>
-
-                                                                        </td>
-                                                                        <td>
-                                                                            <input class="form-control" name="ChangeEmail" id="ChangeEmail" />
-
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td>
-                                                                            <input type="submit" value="Change Email" class="btn btn-primary" />
-                                                                        </td>
-                                                                        <td>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-
-                                                            }
+                                                <div style="display:grid;grid-template-columns:49% 49%;justify-content:space-between;">
+                                                    <div class="col-6">
+                                                        <div class="d-flex flex-column">
+                                                            <p class="text mb-1">CVV/CVC</p>
+                                                            <input class="form-control mb-3 pt-2 " id="CVC" name="CVC" type="password" placeholder="***">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex flex-column">
+                                                            <p class="text mb-1">Payment Amount</p>
+                                                            <input class="form-control mb-3" id="PayButton" name="PayButton" type="number">
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                                        
-
-
-                                                        }
-
-                                                    </div>
+                                                <div class="btn btn-primary" style="margin-top:20px; border-radius:unset;margin-bottom:20px;">
+                                                    <button class='btn btn-primary' type='submit'>Pay »</button>
 
 
                                                 </div>
                                             </div>
+                                        }
 
 
 
 
 
-                                        </div>
-                    </div>
+                                    </div>
 
                                 </div>
                             </div>
-
                         </div>
+                    }
+
+                    @if (ViewBag.sender == "ManageProfile")
+                    {
+
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); padding:20px;">
+                                        <label class="col-12 control-label">Change Your Password</label>
+
+                                        @Html.Partial("~/Views/Manage/ChangePassword.cshtml")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+
+
+
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+
+                                    @if (ViewBag.sender == "MyInformation")
+                                    {
+
+
+
+                                        <table class="table table-responsive" style="width:99%;">
+                                            <tr>
+                                                <td>
+                                                    <strong>  First Name:</strong>
+                                                </td>
+                                                <td>
+                                                    @Model.First_Name
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>  Last Name:  </strong>
+                                                </td>
+                                                <td>
+                                                    @Model.Last_Name
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>  Email:  </strong>
+                                                </td>
+                                                <td>
+                                                    @Model.Email
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>  Phone Number:  </strong>
+                                                </td>
+                                                <td>
+                                                    @Model.PhoneNumber
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>    National Number:  </strong>
+                                                </td>
+                                                <td>
+                                                    @Model.National_Number
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>   HighSchool Avg:  </strong>
+                                                </td>
+                                                <td>
+                                                    @Model.HighSchool_Avg
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>   Major: </strong>
+                                                </td>
+                                                <td>
+                                                    @Model.Major
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>   Balance: </strong>
+                                                </td>
+                                                <td>
+                                                    @Model.Balance
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+
+
+
+                                    }
+                                    else if (ViewBag.sender == "MyCourses")
+                                    {
+                                       
+                                    }
+                                    else if (ViewBag.sender == "Balance")
+                                    {
+
+
+                                        <div id="smart-button-container" style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);width:95%;padding:50px 20px 0px 20px;">
+
+                                            <div style="text-align: center;">
+                                                <div id="paypal-button-container">
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p></p>
+                                                    <script src="https://www.paypal.com/sdk/js?client-id=AYOPFmJHKEp34Obn8Gp5EJhzo8qOotnJl2Y6lj3E72wh3UcV-V-gVaGPkM-bR-XvEfuvN5ZhSeOgZk6R&amp;enable-funding=venmo&amp;currency=USD" data-sdk-integration-source="button-factory"></script>
+                                                    <script>
+                                                        function initPayPalButton() {
+                                                            paypal.Buttons({
+                                                                style: {
+                                                                    shape: 'rect',
+                                                                    color: 'gold',
+                                                                    layout: 'vertical',
+                                                                    label: 'paypal',
+
+                                                                },
+
+                                                                createOrder: function (data, actions) {
+                                                                    return actions.order.create({
+                                                                        purchase_units: [{ "description": "شراء حسابات ميرش باي امازون", "amount": { "currency_code": "USD", "value": 60 } }]
+                                                                    });
+                                                                },
+
+                                                                onApprove: function (data, actions) {
+                                                                    return actions.order.capture().then(function (orderData) {
+
+                                                                        // Full available details
+                                                                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                                                                        // Show a success message within this page, e.g.
+                                                                        const element = document.getElementById('paypal-button-container');
+                                                                        element.innerHTML = '';
+                                                                        element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+                                                                        // Or go to another URL:  actions.redirect('thank_you.html');
+
+                                                                    });
+                                                                },
+
+                                                                onError: function (err) {
+                                                                    console.log(err);
+                                                                }
+                                                            }).render('#paypal-button-container');
+                                                        }
+                                                        initPayPalButton();
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    }
+                                    else if (ViewBag.sender == "ManageProfile")
+                                    {
+                                        <div class="col-md-12 mb-3">
+                                            <div class="card">
+                                                <div class="card-body">
+
+                                                    <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);width:95%;padding:20px;margin-bottom:20px;">
+                                                        <label class="col-12 control-label">Current Phone Number: @ViewBag.PhoneNumber</label>
+
+
+                                                        @using (Html.BeginForm("ChangePhone", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                                        {
+
+                                                            @Html.AntiForgeryToken()
+                                                            if (ViewData.ModelState.ContainsKey("adrara"))
+                                                            {
+                                                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                                            }
+
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>
+                                                                        <label class="col-12 control-label">New Phone Number</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input class="form-control" name="Pnumber" id="Pnumber" />
+
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="submit" class="btn btn-primary" />
+                                                                    </td>
+                                                                    <td>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 mb-3">
+                                            <div class="card">
+                                                <div class="card-body">
+
+                                                    <div style="box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -webkit-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29); -moz-box-shadow: 2px 0px 23px 6px rgba(0,0,0,0.29);padding:20px;width:95%;margin-bottom:20px;">
+                                                        <label class="col-12 control-label">Current Email: @ViewBag.Email</label>
+
+                                                       
+                                                        @using (Html.BeginForm("ChangeEmail", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                                        {
+                                                            @Html.AntiForgeryToken()
+                                                            if (ViewData.ModelState.ContainsKey("adrara"))
+                                                            {
+                                                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                                            }
+                                                                
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>
+                                                                        <label class="col-12 control-label">New Email</label>
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input class="form-control" name="ChangeEmail" id="ChangeEmail" />
+
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="submit" value="Change Email" class="btn btn-primary" />
+                                                                    </td>
+                                                                    <td>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    }
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
         </div>
-   
- 
+
+    </div>
+</div>
+
+
 @*<div class="bs-callout bs-callout-danger">
         <h4>Summary</h4>
         <p>
@@ -1195,3 +1204,6 @@
     </table>*@
 
 <!-- resume -->
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

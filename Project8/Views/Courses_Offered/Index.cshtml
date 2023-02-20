@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Courses_Offered</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -19,6 +19,18 @@
             @Html.DisplayNameFor(model => model.end_time)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Seat_Count)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hall)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registered)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Cours.Course_Name)
         </th>
         <th>
@@ -26,6 +38,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.semester.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day.Days)
         </th>
         <th></th>
     </tr>
@@ -39,6 +54,18 @@
             @Html.DisplayFor(modelItem => item.end_time)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Seat_Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hall)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Capacity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Registered)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Cours.Course_Name)
         </td>
         <td>
@@ -46,6 +73,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.semester.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Day.Days)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.offered_id }) |

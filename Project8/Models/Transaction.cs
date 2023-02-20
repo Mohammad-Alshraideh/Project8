@@ -11,16 +11,29 @@ namespace Project8.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Transaction
     {
         public int Transaction_Id { get; set; }
         public Nullable<System.DateTime> Transaction_Date { get; set; }
+        [Required]
+   
         public string FullName { get; set; }
+        [Required]
+        [MinLength(16, ErrorMessage = "Card Number Must Be 16 Characters Long")]
+        [MaxLength(16, ErrorMessage = "Card Number Must Be 16 Characters Long")]
         public Nullable<int> CardNumber { get; set; }
+        [Required]
+        [MinLength(3, ErrorMessage = "CVC Must Be 3 Characters Long")]
+        [MaxLength(3, ErrorMessage = "CVC  Number Must Be 3 Characters Long")]
         public Nullable<int> CVC { get; set; }
+        [Required]
         public Nullable<System.DateTime> Visa_ExpireDate { get; set; }
+
         public Nullable<bool> User_Action { get; set; }
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Only positive number allowed")]
         public Nullable<int> Amount { get; set; }
         public string UserId { get; set; }
     

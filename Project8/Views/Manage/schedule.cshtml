@@ -1,0 +1,107 @@
+﻿
+
+
+@{
+    ViewBag.Title = "schedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>schedule</h2>
+@if (ViewBag.messege == "get")
+{
+    <form method="post">
+        <select class="form-control" name="semesterid" id="semesterid">
+            @foreach (var item in Model.s)
+            {
+                <option value="@item.id">@item.name</option>
+
+            }
+        </select>
+
+        <select class="form-control" name="majorid" id="majorid">
+            @foreach (var item in Model.m)
+            {
+                <option value="@item.Major_Id">@item.Major_Name</option>
+
+            }
+        </select>
+        <button type="submit">Show Courses</button>
+    </form>}
+else
+{
+    <form method="post">
+        <select class="form-control" name="semesterid" id="semesterid">
+            @foreach (var item in Model.s)
+            {
+                if (item.id == ViewBag.semesterid)
+                {
+                    <option selected value="@item.id">@item.name</option>
+                }
+                else
+                {
+                    <option value="@item.id">@item.name</option>
+                }
+
+
+            }
+        </select>
+
+        <select class="form-control" name="majorid" id="majorid">
+            @foreach (var item in Model.m)
+            {
+                if (item.Major_Id == ViewBag.majorid)
+                {
+                    <option selected value="@item.Major_Id">@item.Major_Name</option>
+                }
+                else
+                {
+                    <option value="@item.Major_Id">@item.Major_Name</option>
+                }
+
+
+            }
+        </select>
+        <button type="submit">Show Courses</button>
+    </form>
+    <br />
+
+    <div class="table-stats order-table ov-h">
+        <table class="table ">
+            <thead>
+                <tr>
+
+                    <th class="avatar">Course NAme</th>
+                    <th>Nomber Of Hours</th>
+                    <th>Course Days</th>
+                    <th>Time</th>
+                    <th>Hall</th>
+                    <th>Capacity</th>
+                    <th>Registered</th>
+                    <th>Doctor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.a)
+                {
+                    <tr>
+                        <td>@item.Cours.Course_Name</td>
+                        <td>  <span class="name">@item.Cours.Number_Of_Hours</span> </td>
+                        <td>  <span class="name">@item.Day.Days</span> </td>
+                        <td> <span class="product">@item.start_time -- @item.end_time</span> </td>
+                        <td>@item.Hall</td>
+
+                        <td>@item.Capacity</td>
+                        <td>  <span class="name">@item.Registered</span> </td>
+                        <td> <span class="product">@item.Doctor.Doctor_Name</span> </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+
+
+
+
